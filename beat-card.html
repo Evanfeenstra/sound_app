@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-icon-button/core-icon-button.html">
+<link rel="import"
+    href="../components/paper-shadow/paper-shadow.html">
+<link rel="import"
+    href="../components/paper-slider/paper-slider.html">  
+<link rel="import" href="../components/core-drag-drop/core-drag-drop.html">
+<link rel="import" href="../components/core-icons/av-icons.html">
+<link rel="import" href="../components/paper-button/paper-button.html">
+<link rel="import"
+    href="../components/paper-tabs/paper-tabs.html">
+
+<link rel="import" href="../components/core-ajax/core-ajax.html">
+
+
+
+<polymer-element name="beat-card" attributes="show">
+<template>
+  <style>
+    :host {
+      display: block;
+      position: relative;
+      background-color: #e5e5e5;
+      width: 100%;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+    /*.card-header {
+      margin-bottom: 10px;
+    }
+    polyfill-next-selector { content: '.card-header h2'; }
+    .card-header ::content h2 {
+      margin: 0;
+      font-size: 1.8rem;
+      font-weight: 300;
+    }
+    polyfill-next-selector { content: '.card-header img'; }
+    .card-header ::content img {
+      width: 70px;
+      border-radius: 50%;
+      margin: 10px;
+    }*/
+
+    ul {
+      padding: 0;
+      list-style-type: none;
+      margin: 0 0;
+    }
+    #beat_container {
+      height: 320px;
+      width: 320px;
+
+    }
+    .drumkit_container {
+      background-color: rgba(200,200,200,0.8);
+
+      height: 160px;
+      width: 200px;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none; 
+      -moz-user-select: none; 
+      -ms-user-select: none; 
+      -o-user-select: none; 
+      user-select: none;
+    }
+    #tabs{
+  	background-color: rgba(34,34,34,0.5);
+    height: 28px;
+    width:200px;
+    color: white;
+    font-size: 0.4em;
+	}
+	  .spanny {
+	  	font-size: 0.5em;
+	  }
+    @media (min-width: 481px) {
+    #beat_container {
+      height: 400px;
+      width: 400px;
+    }
+    .drumkit_container {
+      height: 220px;
+      width: 260px;
+    }
+    #tabs {
+    	font-size: 0.8em;
+    	width: 260px;
+      height: 40px;
+    }
+    .spanny {
+    	font-size: 0.8em;
+    }
+  } /*end @MEDIA*/
+
+  #beat_row_1 {
+    width: 80%;
+    margin: auto;
+    background-color: #ccc;
+  }
+  #beat_row_3 {
+    width: 80%;
+    margin: auto;
+    background-color: #ccc;
+  }
+  #beat_row_2 {
+    background-color: #ccc;
+  }
+  #beat_row_4 {
+    background-color: #ccc;
+  }
+  .s{
+  	background-color: #bbc;
+  	outline: 1px solid #fff;
+  	opacity: 0.6;
+  	cursor: default;
+  	filter: blur(5px);
+  }
+  .box {
+      border-radius: 0px;
+      font-size: 12px;
+  }
+  #beat_central_container{
+    background: radial-gradient(#333,#ddd); /* Standard syntax */
+
+  }
+  
+  #middle_container {
+  	margin:30px;
+  }
+  .sliders{
+  	padding: 10px;
+  }
+  
+ 
+  
+  </style>
+  <!--<div class="card-header" layout horizontal center>
+    <content select="img"></content>
+    <content select="h2"></content>
+  </div>-->
+  <core-ajax auto url="./api/beat.json" handleAs="json" on-core-response="{{ajaxResponse}}"></core-ajax>
+
+
+  <div id="topbar">
+  <core-icon-button id='button' icon='label' on-tap="{{go_dude}}">{{play_toggle}}</core-icon-button>
+      <input type="button" value="ios" onclick="unmute_ios(bufferLoader.bufferList);" />
+  <core-icon-button id='loadbutton' icon='launch' on-tap="{{load_beat}}">Load Beat</core-icon-button>   
+  </div> 
+    
+  <div vertical layout id="beat_container">
+      
+
+
+    
+    <ul flex one id="beat_row_1" layout horizontal>
+      <paper-shadow flex id="a" class="s" ></paper-shadow>
+      <paper-shadow flex id="b" class="s" ></paper-shadow>
+      <paper-shadow flex id="c" class="s" ></paper-shadow>
+      <paper-shadow flex id="d" class="s" ></paper-shadow>
+      <paper-shadow flex id="e" class="s" ></paper-shadow>
+      <paper-shadow flex id="f" class="s" ></paper-shadow>
+      <paper-shadow flex id="g" class="s" ></paper-shadow>
+      <paper-shadow flex id="h" class="s" ></paper-shadow>
+    </ul>
+    <div layout horizontal flex eight id="beat_inner_container">
+      <ul flex one id="beat_row_4" layout vertical reverse>
+        <paper-shadow flex id="y" class="s" ></paper-shadow>
+        <paper-shadow flex id="z" class="s" ></paper-shadow>
+        <paper-shadow flex id="za" class="s" ></paper-shadow>
+        <paper-shadow flex id="zb" class="s" ></paper-shadow>
+        <paper-shadow flex id="zc" class="s" ></paper-shadow>
+        <paper-shadow flex id="zd" class="s" ></paper-shadow>
+        <paper-shadow flex id="ze" class="s" ></paper-shadow>
+        <paper-shadow flex id="zf" class="s" ></paper-shadow>
+      </ul>
+      <div flex eight id="beat_central_container">
+        
+
+        <div id="middle_container">
+        <paper-tabs id="tabs" selected="kit" self-end>
+          <paper-tab id="tabone" name="kit">Kit</paper-tab>
+          <paper-tab id="tabtwo" name="effects">Effects</paper-tab>
+          <paper-tab id="tabthree" name="samples">Samples</paper-tab>
+        </paper-tabs>
+
+        <template if="{{drumkit_visible}}">
+        <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
+        <core-drag-drop></core-drag-drop>
+          <div flex horizontal layout>
+            <paper-button flex raised class="box" style="background-color: #5C6BC0;" draggable="false" on-tap="{{play_samp1}}">kick</paper-button>
+            <paper-button flex raised class="box" style="background-color: #FF9800;" draggable="false" on-tap="{{play_samp2}}">snare</paper-button>
+            <paper-button flex raised class="box" style="background-color: #4CAF50;" draggable="false" on-tap="{{play_samp3}}">hihat</paper-button>
+          </div>
+          <div flex horizontal layout>
+            <paper-button flex raised class="box" style="background-color: #2196F3;" draggable="false" on-tap="{{play_samp4}}">kick808</paper-button>
+            <paper-button flex raised class="box" style="background-color: #bbc;" draggable="false">erase</paper-button>
+            <paper-button flex raised class="box" style="background-color: #9EE003;" draggable="false" on-tap="{{play_samp5}}">hihat2</paper-button>
+          </div>
+          <div flex horizontal layout>
+            <paper-button flex raised class="box" style="background-color: #AB47BC;" draggable="false" on-tap="{{play_samp6}}">jawharp</paper-button>
+            <paper-button flex raised class="box" style="background-color: #EF5350;" draggable="false" on-tap="{{play_samp7}}">clap</paper-button>
+            <paper-button flex raised class="box" style="background-color: #8D6E63;" draggable="false" on-tap="{{play_samp8}}">clave</paper-button>
+          </div>
+        </div>
+        </template>
+        
+
+
+        <template if="{{effects_visible}}">
+        <div vertical layout class="drumkit_container">
+        
+        <div class="sliders">
+         <span class="spanny">Playback speed: <b>{{speed_setting}}</b></span>
+         <paper-slider pin value="{{speed_setting_proxy}}" immediateValue="{{speed_setting}}"></paper-slider>
+        <br>
+         <span class="spanny">Filter cutoff: <b>{{filter_cutoff}}</b></span>
+         <paper-slider pin value="{{filter_cutoff_proxy}}" immediateValue="{{filter_cutoff}}"></paper-slider>
+        
+         </div>
+
+         </div>
+        </template>
+
+        <template if="{{samples_visible}}">
+        <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
+        
+        <div class="sliders">
+         <span class="spanny">Sample Pitch: {{}}</span>
+         <paper-slider pin value="{{}}"></paper-slider>
+        <br>
+         <span class="spanny">Sample Delay: {{}}</span>
+         <paper-slider pin value="{{}}"></paper-slider>
+        
+         </div>
+
+         </div>
+        </template>
+
+        </div> <!--end MIDDLE container-->
+
+      </div>
+      <ul flex one id="beat_row_2" layout vertical>
+        <paper-shadow flex id="i" class="s" draggable="false"></paper-shadow>
+        <paper-shadow flex id="j" class="s"></paper-shadow>
+        <paper-shadow flex id="k" class="s"></paper-shadow>
+        <paper-shadow flex id="l" class="s"></paper-shadow>
+        <paper-shadow flex id="m" class="s"></paper-shadow>
+        <paper-shadow flex id="n" class="s"></paper-shadow>
+        <paper-shadow flex id="o" class="s"></paper-shadow>
+        <paper-shadow flex id="p" class="s"></paper-shadow>
+      </ul>
+    </div>
+    <ul flex one id="beat_row_3" layout horizontal reverse>
+      <paper-shadow flex id="q" class="s"></paper-shadow>
+      <paper-shadow flex id="r" class="s"></paper-shadow>
+      <paper-shadow flex id="s" class="s"></paper-shadow>
+      <paper-shadow flex id="t" class="s"></paper-shadow>
+      <paper-shadow flex id="u" class="s"></paper-shadow>
+      <paper-shadow flex id="v" class="s"></paper-shadow>
+      <paper-shadow flex id="w" class="s"></paper-shadow>
+      <paper-shadow flex id="x" class="s"></paper-shadow>
+      </ul>
+  </div>
+
+  <!--<content></content>-->
+</template>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
+<script type="text/javascript" src="buffer-loader.js"></script>
+<script>
+
+
+	
+
+//DRAG N DROP FROM POLYMER core-drag-drop
+addEventListener('drag-start', function(e) {
+  var dragInfo = e.detail;
+  // flaw #2: e vs dragInfo.event
+  var color = dragInfo.event.target.style.backgroundColor;
+  dragInfo.avatar.style.cssText = 'border: 3px solid ' + color + '; width: 15px; height: 15px; border-radius: 15px; background-color: whitesmoke';
+  //e.detail.avatar.appendChild(document.querySelector('#hello'));
+  dragInfo.drag = function() {};
+  dragInfo.drop = drop;
+});
+//
+function drop(dragInfo) {
+  var color = dragInfo.avatar.style.borderColor;
+  var dropTarget = dragInfo.event.relatedTarget;
+  if (color && dropTarget.className === 's') {
+    //var f = dragInfo.framed;
+    //var d = document.createElement('div');
+    //d.className = 'dropped';
+    //d.style.left = f.x - 4 + 'px';
+    //d.style.top = f.y - 4 + 'px';
+    //d.style.backgroundColor = color;
+    //dropTarget.appendChild(d);
+    dropTarget.style.backgroundColor = color;
+    var id_name=dropTarget.id;
+    console.log(color);
+    //assign the sound/color to the place in beats_array
+    beats_array[div_array.indexOf(id_name)]=color_array.indexOf(color)+1;
+  }
+}
+
+
+
+
+
+//this is where the real stuff goes down
+function play_yo_yo(filter_cutoff_yo) {
+
+
+		if (Beats.setting==0) {
+          //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
+          Beats.id_yo[Beats.setting].setZ(0);
+          Beats.id_yo[Beats.setting].style.opacity="1.0";
+          Beats.id_yo[Beats.id_yo.length-1].setZ(1);
+          Beats.id_yo[Beats.id_yo.length-1].style.opacity="0.6"
+          
+        }
+        else {
+         //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
+         Beats.id_yo[Beats.setting].setZ(0);
+         Beats.id_yo[Beats.setting].style.opacity="1.0";
+         Beats.id_yo[(Beats.setting-1)].setZ(1);
+         Beats.id_yo[(Beats.setting-1)].style.opacity="0.6"
+        }
+      
+      var startTime = Audiocontext.currentTime + 0.100;
+
+      if (beats_array[Beats.setting]==1) {
+      	playSound(bufferListy[0], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==2) {
+      	playSound(bufferListy[1], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==3) {
+      	playSound(bufferListy[2], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==4) {
+        playSound(bufferListy[3], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==5) {
+        playSound(bufferListy[4], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==6) {
+        playSound(bufferListy[5], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==7) {
+        playSound(bufferListy[6], startTime, filter_cutoff_yo);
+      }
+      else if (beats_array[Beats.setting]==8) {
+        playSound(bufferListy[7], startTime, filter_cutoff_yo);
+      }
+
+      Beats.setting = Beats.setting +1;
+      if (Beats.setting>31) {
+        Beats.setting=0;
+        
+    }
+}
+
+//de-mute audio on IOS...
+function unmute_ios(bufferList) {
+    var hihat = bufferList[2];
+    // We'll start playing the rhythm 100 milliseconds from "now"
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(hihat, startTime);
+}
+
+
+var Beats = {
+  filter_yo: 50,
+  setting: 0,
+  not_playing: true,
+  responsy: [],
+  id_yo: []
+};
+
+var bufferListy;
+//var filter_yo;
+ //the place in the pattern
+
+var div_array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+							'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+							'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+							'y', 'z', 'za', 'zb', 'zc', 'zd', 'ze', 'zf'];
+var color_array = ['rgb(92, 107, 192)', 'rgb(255, 152, 0)', 'rgb(76, 175, 80)', 'rgb(33, 150, 243)', 'rgb(158, 224, 3)', 'rgb(171, 71, 188)',
+'rgb(239, 83, 80)', 'rgb(141, 110, 99)'];
+var beats_array = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+//console.log('bang');
+
+  //this Polmer call constructs the custom element. Argument is the element's prototype (like a base class)
+  //mthods and properties can be initiated in here.
+Polymer('beat-card', {
+
+
+  ajaxResponse: function(event, response) {
+      Beats.responsy = response.response[0].beat;
+  },
+
+  load_beat: function() {
+          beats_array = Beats.responsy;
+          for (var i=0; i<32; i++) {
+            Beats.id_yo[i].style.backgroundColor = color_array[beats_array[i]-1];
+          }
+  },
+
+  age: 25,
+
+  speed_setting: 50,
+  speed_setting_proxy: 50,
+
+  filter_cutoff: 50,
+  filter_cutoff_proxy: 50,
+    
+  	play_toggle: "Play",
+
+    //ready method is called when Polymer finished initialization
+    ready: function() {
+
+    	var beatstabs=this.$.beat_container.querySelector('paper-tabs');
+    	beatstabs.addEventListener('core-select', function() {
+    		if (beatstabs.selected=='kit') {
+    			this.drumkit_visible = true;
+        		this.effects_visible = false;
+        		this.samples_visible = false;
+    		}
+    		if (beatstabs.selected=='effects') {
+    			this.drumkit_visible = false;
+        		this.effects_visible = true;
+        		this.samples_visible = false;
+    		}
+    		if (beatstabs.selected=='samples') {
+    			this.drumkit_visible = false;
+        		this.effects_visible = false;
+        		this.samples_visible = true;
+    		}
+    	}.bind(this));
+
+      //HIDE WITH THIS PUBLISHED PROPERTY, CAN BE ACESSED FROM OUTSIDE!!!!
+      this.drumkit_visible = true;
+      this.effects_visible = false;
+      this.samples_visible = false;
+
+      try {
+        window.AudioContext = window.AudioContext||window.webkitAudioContext; //WEBKIT FOR SAFARI 
+        Audiocontext = new AudioContext();
+        }
+      catch(e) {
+        alert("dang yo, Web Audio API is not supported in this browser");
+      }
+    
+
+    // Start loading the drum kit.
+    //bufferLoader class from Middle Ear Media tutorial on Web Audio Api
+    bufferLoader = new BufferLoader(
+        Audiocontext,
+        [
+        "/beats/sounds/kick.wav",
+        "/beats/sounds/snare.wav",
+        "/beats/sounds/hihat.wav",
+        "/beats/sounds/Kick808.wav",
+        "/beats/sounds/ohat.wav",
+        "/beats/sounds/jawharp.wav",
+        "/beats/sounds/clap.wav",
+        "/beats/sounds/tic.wav"
+        ],
+        bufferLoadCompleted  
+    );
+
+    bufferLoader.load();
+
+    function bufferLoadCompleted() {
+      //YES this empty function makes it work on firefox/safari!!!! I dont know why...
+    }
+
+    bufferListy=bufferLoader.bufferList; //this line added, works now
+
+    Beats.filter_yo = Audiocontext.createBiquadFilter();
+
+      //make the id_yo list of paper-shadow elements
+      var id_list = this.$.beat_container.querySelectorAll('.s');
+      Beats.id_yo = Array.prototype.slice.call(id_list, 0);
+      Beats.id_yo.sort(function(a,b) {
+        if (a.id < b.id)
+          return -1;
+        if (a.id > b.id)
+          return 1;
+        return 0;
+      });
+
+  	},
+
+  	
+
+  	play_samp1: function() {
+  			var kick = bufferListy[0];
+  			var filter_cutoff_yo = this.filter_cutoff;
+  			var startTime = Audiocontext.currentTime + 0.100;
+      	playSound(kick, startTime, filter_cutoff_yo);
+  	},
+
+  	play_samp2: function() {
+  			var snare = bufferListy[1];
+  			var filter_cutoff_yo = this.filter_cutoff;
+  			var startTime = Audiocontext.currentTime + 0.100;
+      	playSound(snare, startTime, filter_cutoff_yo);
+  	},
+
+  	play_samp3: function() {
+  			var hihat = bufferListy[2];
+  			var filter_cutoff_yo = this.filter_cutoff;
+  			var startTime = Audiocontext.currentTime + 0.100;
+      	playSound(hihat, startTime, filter_cutoff_yo);
+  	},
+
+    play_samp4: function() {
+        var filter_cutoff_yo = this.filter_cutoff;
+        var startTime = Audiocontext.currentTime + 0.100;
+        playSound(bufferListy[3], startTime, filter_cutoff_yo);
+    },
+
+    play_samp5: function() {
+        var filter_cutoff_yo = this.filter_cutoff;
+        var startTime = Audiocontext.currentTime + 0.100;
+        playSound(bufferListy[4], startTime, filter_cutoff_yo);
+    },
+
+    play_samp6: function() {
+        var filter_cutoff_yo = this.filter_cutoff;
+        var startTime = Audiocontext.currentTime + 0.100;
+        playSound(bufferListy[5], startTime, filter_cutoff_yo);
+    },
+
+    play_samp7: function() {
+        var filter_cutoff_yo = this.filter_cutoff;
+        var startTime = Audiocontext.currentTime + 0.100;
+        playSound(bufferListy[6], startTime, filter_cutoff_yo);
+    },
+
+    play_samp8: function() {
+        var filter_cutoff_yo = this.filter_cutoff;
+        var startTime = Audiocontext.currentTime + 0.100;
+        playSound(bufferListy[7], startTime, filter_cutoff_yo);
+    },
+
+    go_dude: function() {
+
+      
+
+      speed_setting_yo = this.speed_setting;
+
+      if (Beats.not_playing==false) {
+        Beats.not_playing=true;
+        this.play_toggle = "Play";
+        var buttonicon = this.$.topbar.querySelector('#button');
+        buttonicon.icon = "label";
+      } //end if Beats.not_playing
+      else {
+    	Beats.not_playing=false;
+    	function goingyoyo() {
+    		if (Beats.not_playing==false) {
+    			var filter_cutoff_yo = this.filter_cutoff;
+	    		play_yo_yo(filter_cutoff_yo); //here's the call
+	    		this.async(goingyoyo, null, this.speed_setting*3+50);
+    		}
+    	}	
+    	this.async(goingyoyo, null, 1);
+    	this.play_toggle = "Stop";
+    	var buttonicon = this.$.topbar.querySelector('#button');
+        buttonicon.icon = "label-outline";
+      }
+
+    } //end go_dude
+
+});//end Polymer
+
+
+
+</script>
+</polymer-element>

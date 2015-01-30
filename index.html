@@ -1,0 +1,151 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>unquote</title>
+
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=no">
+
+  <script src="../components/webcomponentsjs/webcomponents.js">
+  </script>
+
+  <link rel="import" href="../components/font-roboto/roboto.html">
+  <link rel="import"
+    href="../components/core-header-panel/core-header-panel.html">
+  <link rel="import"
+    href="../components/core-toolbar/core-toolbar.html">
+  <link rel="import"
+    href="../components/paper-tabs/paper-tabs.html">
+  <!--<link rel="import" href="post-list.html">-->
+  <link rel="import" href="beat-card.html">
+  <link rel="import" href="synth-card.html">
+  <!--<link rel="import" href="components/core-scaffold/core-scaffold.html">-->
+
+
+  <link rel="import" href="../components/core-pages/core-pages.html">
+  <!--MUST IMPORT .HTML ELEMETS!!!-->
+
+  <style>
+  html,body {
+    height: 100%;
+    margin: 0;
+    background-color: #E5E5E5;
+    font-family: 'RobotoDraft', sans-serif;
+
+  }
+  core-header-panel {
+    height: 100%;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch; 
+  }
+  core-toolbar {
+    background: #03a9f4;
+    color: white;
+  }
+  #tabs {
+    width: 100%;
+    margin: 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+	text-transform: uppercase;
+  }
+  .container {
+    width: 320px;
+    margin: auto;
+
+  }
+  @media (min-width: 481px) {
+    #tabs {
+      width: 200px;
+    }
+    .container {
+      width: 400px;
+    }
+  }
+  .papersheet {
+  }
+  
+  
+  
+
+  </style>
+
+</head>
+
+<body unresolved>
+
+
+  <core-header-panel>
+
+    <core-toolbar>
+      <paper-tabs id="tabs" selected="0" self-end>
+        <paper-tab id="beatstab" name="0">Beats</paper-tab>
+        <paper-tab id="synthtab" name="1">Synth</paper-tab>
+      </paper-tabs>
+    </core-toolbar>
+
+    <core-pages selected="0">
+    <div>
+      <div class="container" layout vertical center>
+        <beat-card>
+        </beat-card>
+      </div>
+      </div>
+
+      <div>
+      <div class="container" layout vertical center>
+        <synth-card>
+        </synth-card>
+    </div>
+    </div>
+
+    </core-pages>
+
+  </core-header-panel>
+
+  <script>
+  var Audiocontext;
+  var bufferLoader;
+  document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }); //added this so cant scoll on mobile.
+
+
+  function playSound(buffer, time, filter_cutoff_yo) {
+    var source = Audiocontext.createBufferSource();
+    source.buffer = buffer;
+    source.connect(Beats.filter_yo);
+    source.playbackRate.value=1.0;//set sample pitches here
+    Beats.filter_yo.type - 'lowpass';
+    Beats.filter_yo.frequency.value = filter_cutoff_yo*25+1;
+    Beats.filter_yo.connect(Audiocontext.destination);
+    source.start(time);
+  }
+
+  //THREE WAYS TO SELECT UGH
+    //var beats = document.querySelector('#beatstab');
+    //var synth = document.querySelector('#synthtab');
+//  var beatcard = document.querySelector('beat-card');
+  //maintabs.beats.addEventListener('click', function() {
+   //   console.log("beats selectd");
+   //   this.beatcard.removeAttribute("hidden")
+   // }.bind(this));
+  //maintabs.synth.addEventListener('click', function() { 
+  //    console.log("synth select");
+  //    this.beatcard.hidden="true";
+  //  }.bind(this));
+
+  var maintabs = document.querySelector('paper-tabs');
+  var pages = document.querySelector('core-pages');
+ 
+  maintabs.addEventListener('core-select', function() {
+    pages.selected = maintabs.selected;
+  });
+
+
+  </script>
+</body>
+
+</html>
