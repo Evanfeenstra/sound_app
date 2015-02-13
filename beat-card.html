@@ -2,21 +2,27 @@
 
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/core-icon-button/core-icon-button.html">
+
+
 <link rel="import"
-    href="../components/paper-shadow/paper-shadow.html">
+href="../components/paper-shadow/paper-shadow.html">
 <link rel="import"
-    href="../components/paper-slider/paper-slider.html">  
+href="../components/paper-slider/paper-slider.html">  
 <link rel="import" href="../components/core-drag-drop/core-drag-drop.html">
 <link rel="import" href="../components/core-icons/av-icons.html">
+<link rel="import" href="../components/core-icons/core-icons.html">
+<link rel="import" href="../components/core-iconset-svg/core-iconset-svg.html">
+
 <link rel="import" href="../components/paper-button/paper-button.html">
 <link rel="import"
-    href="../components/paper-tabs/paper-tabs.html">
+href="../components/paper-tabs/paper-tabs.html">
+<link rel="import"
+href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
+<link rel="import"
+    href="../components/paper-input/paper-input.html">
 
-<link rel="import" href="../components/core-ajax/core-ajax.html">
 
-
-
-<polymer-element name="beat-card" attributes="show">
+<polymer-element name="beat-card">
 <template>
   <style>
     :host {
@@ -54,9 +60,9 @@
 
     }
     .drumkit_container {
-      background-color: rgba(200,200,200,0.8);
+      background-color: rgba(228,228,228,0.7);
 
-      height: 160px;
+      height: 170px;
       width: 200px;
       -webkit-touch-callout: none;
       -webkit-user-select: none; 
@@ -65,17 +71,148 @@
       -o-user-select: none; 
       user-select: none;
     }
+    
     #tabs{
-  	background-color: rgba(34,34,34,0.5);
-    height: 28px;
-    width:200px;
-    color: white;
-    font-size: 0.4em;
-	}
-	  .spanny {
-	  	font-size: 0.5em;
-	  }
-    @media (min-width: 481px) {
+     background-color: rgba(34,34,34,0.5);
+     height: 28px;
+     width:200px;
+     color: white;
+     font-size: 0.4em;
+   }
+   #tabsamples #t1{
+      background-color: rgba(92, 107, 192, 0.8);
+   }
+   #tabsamples #t2{
+      background-color: rgba(255, 152, 0, 0.8);
+   }
+   #tabsamples #t3{
+      background-color: rgba(76, 175, 80, 0.8);
+   }
+   #tabsamples #t4{
+      background-color: rgba(33, 150, 243, 0.8);
+   }
+   #tabsamples #t5{
+      background-color: rgba(158, 224, 3, 0.8);
+   }
+   #tabsamples #t6{
+      background-color: rgba(171, 71, 188, 0.8);
+   }
+   #tabsamples #t7{
+      background-color: rgba(239, 83, 80, 0.8);
+   }
+   #tabsamples #t8{
+      background-color: rgba(141, 110, 99, 0.8);
+   }
+   #tabsamples {
+   	height: 170px;
+   }
+   paper-vertical-tabs.vert::shadow #selectionBar {
+   	/* THIS IS THE effects vertical sample selection tabs*/
+   	position: relative;
+   	z-index: 1;
+   	opacity: 0.6;
+   }
+   .spanny {
+    font-size: 0.5em;
+    padding: 0px 24px 0px 12px;
+    margin-top: 6px;
+  }
+  paper-slider::shadow #sliderContainer {
+    height: 10px;
+    width: 55%;
+  }
+  paper-slider::shadow #sliderBar {
+    padding: 0px;
+  }
+  paper-slider::shadow #sliderKnob {
+    height: 16px;
+  }
+  .sliders{
+    padding: 12px 10px 7px 10px;
+  }
+  .fx{
+    padding: 2px 8px 2px 8px;
+  }
+  .dropdwn {
+    margin: 0px 0px;
+    -moz-appearance: none;
+    -webkit-appearance: none; 
+    appearance: none;
+    border-radius: 0px;
+    font-family: 'RobotoDraft', sans-serif;
+    font-size: 0.5em;
+    background-color: rgba(34,34,34,0.0);
+    border: 0px;
+    border-bottom: 1px solid #777;
+    padding-right:18px;
+    max-width: 65px;
+    overflow:hidden;
+    cursor: pointer; cursor: hand;
+  }
+  label {position:relative}
+  label:after {
+    content:'>';
+    font:0.5em 'RobotoDraft', monospace;
+    color:#777;
+    -webkit-transform:rotate(90deg);
+    -moz-transform:rotate(90deg);
+    -ms-transform:rotate(90deg);
+    transform:rotate(90deg);
+    right:0px;
+    position:absolute;
+    pointer-events:none;
+  }
+  #xy_bounder {
+  	border: 5px solid;
+  	border-color: rgb(92, 107, 192);
+  	border-radius: 5px;
+ 	margin: 3px 0px 4px 0px;
+  }
+  #xy {
+  	border: 1px solid;
+  	border-color: rgb(92, 107, 192);
+  	background-color: rgba(34,34,34,0.4);
+    width: 100%;
+    height: 115px;
+    margin:0px;
+  }
+  #thing {
+    position: relative;
+    top: 90px;
+    left:0px;
+    transition: left .2s ease-in, top .2s ease-in;
+    height: 10px;
+    width: 10px;
+    border: 5px solid;
+    border-color: rgb(92, 107, 192);
+    border-radius: 10px;
+    background-color: whitesmoke;
+  }
+  #fx_svg1 {
+  	width:6px; 
+  	height:10px;
+  }
+  #fx_svg2 {
+  	width: 10px;
+  	height: 6px;
+  }
+  #fx_uispan1{
+  	margin-top: 0px;
+  }
+  /*end small devices*/
+
+
+
+
+
+
+  @media (min-width: 481px) {
+    .sliders{
+      padding: 22px 10px 16px 10px;
+    } 
+    .fx {
+    	padding: 8px 10px 8px 10px;
+    }
     #beat_container {
       height: 400px;
       width: 400px;
@@ -89,10 +226,58 @@
     	width: 260px;
       height: 40px;
     }
+    
     .spanny {
     	font-size: 0.8em;
     }
-  } /*end @MEDIA*/
+    paper-slider::shadow #sliderContainer {
+      height: 36px;
+      width: 75%;
+    }
+    paper-slider::shadow #sliderBar {
+      padding: 8px 0px;
+    }
+    paper-slider::shadow #sliderKnob {
+      height: 32px;
+    }
+    .dropdwn {
+      font-size: 1em;
+    }
+    label:after {
+      font:0.8em 'RobotoDraft', monospace;
+    }
+    #tabsamples {
+   	height: 220px;
+   }
+   #xy_bounder {
+   	margin: 13px 0px 6px 0px;
+   }
+   #xy {
+   	height: 135px;
+   }
+   #thing {
+   	top: 109px;
+   }
+   #fx_ui1 {
+   	margin-bottom: 0px;
+   }
+   #fx_svg1 {
+  	width:10px; 
+  	height:13px;
+   }
+   #fx_svg2 {
+  	width: 13px;
+  	height: 10px;
+   }
+   #fx_uispan1 {
+   	margin-top: 1px;
+   }
+ } /*end @MEDIA for big screen*/
+
+
+
+
+
 
   #beat_row_1 {
     width: 80%;
@@ -118,42 +303,66 @@
   	filter: blur(5px);
   }
   .box {
-      border-radius: 0px;
-      font-size: 12px;
+    border-radius: 0px;
+    font-size: 12px;
   }
   #beat_central_container{
-    background: radial-gradient(#333,#ddd); /* Standard syntax */
-
+    background: radial-gradient(#222,#eee); /* Standard syntax */
   }
-  
   #middle_container {
   	margin:30px;
   }
-  .sliders{
-  	padding: 10px;
+  paper-dropdown-menu {
+    margin: 0px 10px;
+    padding: 0px;
   }
-  
- 
-  
-  </style>
-  <!--<div class="card-header" layout horizontal center>
-    <content select="img"></content>
-    <content select="h2"></content>
-  </div>-->
-  <core-ajax auto url="./api/beat.json" handleAs="json" on-core-response="{{ajaxResponse}}"></core-ajax>
+  paper-dropdown-menu::shadow core-icon {
+    height: 18px;
+  }
+  .bpm_input {
+    margin:0px 8px;
+    width: 38px;
+  }
+  .bpm_input::shadow paper-input-decorator {
+    margin:0px;
+    padding:0px;
+  }
+  #topbar {
+    max-height: 42px;
+    white-space: nowrap;
+  }
+  #sample_dropdwn {
+  	max-width: 90px;
+  }
 
 
-  <div id="topbar">
-  <core-icon-button id='button' icon='label' on-tap="{{go_dude}}">{{play_toggle}}</core-icon-button>
-      <input type="button" value="ios" onclick="unmute_ios(bufferLoader.bufferList);" />
-  <core-icon-button id='loadbutton' icon='launch' on-tap="{{load_beat}}">Load Beat</core-icon-button>   
+  
+
+  
+  /*.dropdwn {
+    max-width: 80px;
+    overflow:hidden;
+    background-color: #444;
+    font-family: 'RobotoDraft', sans-serif;
+    color: #ddd;
+  }*/
+  
+
+  
+</style>
+
+  <div id="topbar" horizontal layout around-justified>
+    <core-icon-button id='button' icon='label' on-tap="{{go_dude}}">{{play_toggle}}</core-icon-button>
+    <input type="button" value="ios" onclick="unmute_ios(bufferLoader.bufferList);" style="margin: 10px;"/>
+    <core-icon-button id='loadbutton' icon='launch' on-tap="{{load_beat}}">Load</core-icon-button>  
+    <span>BPM:<paper-input label="BPM" class="bpm_input" value='220' committedValue="{{bpm_yo}}"></paper-input></span>
   </div> 
-    
+
   <div vertical layout id="beat_container">
-      
 
 
-    
+
+
     <ul flex one id="beat_row_1" layout horizontal>
       <paper-shadow flex id="a" class="s" ></paper-shadow>
       <paper-shadow flex id="b" class="s" ></paper-shadow>
@@ -176,103 +385,336 @@
         <paper-shadow flex id="zf" class="s" ></paper-shadow>
       </ul>
       <div flex eight id="beat_central_container">
-        
+
 
         <div id="middle_container">
-        <paper-tabs id="tabs" selected="kit" self-end>
-          <paper-tab id="tabone" name="kit">Kit</paper-tab>
-          <paper-tab id="tabtwo" name="effects">Effects</paper-tab>
-          <paper-tab id="tabthree" name="samples">Samples</paper-tab>
+          <paper-tabs id="tabs" selected="{{central_selected}}" self-end>
+          <paper-tab name="kit">Kit</paper-tab>
+          <paper-tab name="master">Master</paper-tab>
+          <paper-tab name="effects">Effects</paper-tab>
         </paper-tabs>
 
-        <template if="{{drumkit_visible}}">
-        <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
-        <core-drag-drop></core-drag-drop>
-          <div flex horizontal layout>
-            <paper-button flex raised class="box" style="background-color: #5C6BC0;" draggable="false" on-tap="{{play_samp1}}">kick</paper-button>
-            <paper-button flex raised class="box" style="background-color: #FF9800;" draggable="false" on-tap="{{play_samp2}}">snare</paper-button>
-            <paper-button flex raised class="box" style="background-color: #4CAF50;" draggable="false" on-tap="{{play_samp3}}">hihat</paper-button>
-          </div>
-          <div flex horizontal layout>
-            <paper-button flex raised class="box" style="background-color: #2196F3;" draggable="false" on-tap="{{play_samp4}}">kick808</paper-button>
-            <paper-button flex raised class="box" style="background-color: #bbc;" draggable="false">erase</paper-button>
-            <paper-button flex raised class="box" style="background-color: #9EE003;" draggable="false" on-tap="{{play_samp5}}">hihat2</paper-button>
-          </div>
-          <div flex horizontal layout>
-            <paper-button flex raised class="box" style="background-color: #AB47BC;" draggable="false" on-tap="{{play_samp6}}">jawharp</paper-button>
-            <paper-button flex raised class="box" style="background-color: #EF5350;" draggable="false" on-tap="{{play_samp7}}">clap</paper-button>
-            <paper-button flex raised class="box" style="background-color: #8D6E63;" draggable="false" on-tap="{{play_samp8}}">clave</paper-button>
+        <div style="{{drumkit_visible}}">
+          <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
+            <core-drag-drop></core-drag-drop>
+            <div flex horizontal layout>
+              <paper-button flex raised class="box" style="background-color: #5C6BC0;" draggable="false" on-tap="{{play_samp1}}" onmousedown='return false;'>kick</paper-button>
+              <paper-button flex raised class="box" style="background-color: #FF9800;" draggable="false" on-tap="{{play_samp2}}">snare</paper-button>
+              <paper-button flex raised class="box" style="background-color: #4CAF50;" draggable="false" on-tap="{{play_samp3}}">hihat</paper-button>
+            </div>
+            <div flex horizontal layout>
+              <paper-button flex raised class="box" style="background-color: #2196F3;" draggable="false" on-tap="{{play_samp4}}">kick808</paper-button>
+              <paper-button flex raised class="box" style="background-color: #bbc;" draggable="false">erase</paper-button>
+              <paper-button flex raised class="box" style="background-color: #9EE003;" draggable="false" on-tap="{{play_samp5}}">hihat2</paper-button>
+            </div>
+            <div flex horizontal layout>
+              <paper-button flex raised class="box" style="background-color: #AB47BC;" draggable="false" on-tap="{{play_samp6}}">jawharp</paper-button>
+              <paper-button flex raised class="box" style="background-color: #EF5350;" draggable="false" on-tap="{{play_samp7}}">clap</paper-button>
+              <paper-button flex raised class="box" style="background-color: #8D6E63;" draggable="false" on-tap="{{play_samp8}}">clave</paper-button>
+            </div>
           </div>
         </div>
-        </template>
         
 
+        <div style="{{levels_visible}}">
+          <div vertical layout class="drumkit_container">
+          <div flex vertical layout around-justified class="sliders">
+          <div flex>
+          	 <div flex horizontal layout justified class="spanny"><span>Reverb: <b>{{reverb_setting}}</b></span>
+           <label><select id='reverbselect' class="dropdwn" onchange="reverbDropChange(this.selectedIndex);">
+             <option>digital short</option>
+             <option>digital long</option>
+             <option>church</option>
+             <option>factory</option>
+             <option>hall</option>
+             <option>spring</option>
+             <option>bucket</option>
+             <option>djembe</option>
+             <option>echo</option>
+             <option>pot</option>
+             <option>telephone</option>
+             <option>vacuum</option>
+           </select></label>
+         </div>
+         <paper-slider pin value="{{reverb_setting_proxy}}" immediateValue="{{reverb_setting}}"></paper-slider>
+         </div>
+            
+            <div flex>
+             <div horizontal layout justified class="spanny"><span>Filter cutoff: <b>{{filter_cutoff}}</b></span>
+              <label><select class="dropdwn" onchange="filterDropChange(this.selectedIndex);" name="type">
+               <option selected>lowpass</option>
+               <option>highpass</option>
+               <option>lowpass, Q</option>
+               <option>highpass, Q</option>
+               <option>lowpass, high Q</option>
+               <option>highpass, high Q</option>
 
-        <template if="{{effects_visible}}">
-        <div vertical layout class="drumkit_container">
-        
-        <div class="sliders">
-         <span class="spanny">Playback speed: <b>{{speed_setting}}</b></span>
-         <paper-slider pin value="{{speed_setting_proxy}}" immediateValue="{{speed_setting}}"></paper-slider>
-        <br>
-         <span class="spanny">Filter cutoff: <b>{{filter_cutoff}}</b></span>
+             </select></label>
+           </div>
+         </span>
          <paper-slider pin value="{{filter_cutoff_proxy}}" immediateValue="{{filter_cutoff}}"></paper-slider>
+         </div>
         
-         </div>
+        	<div flex>
+             <div horizontal layout justified class="spanny"><span style="white-space: nowrap;">Compression: <b>{{compressor_setting}}</b></span>
+               <label><select class="dropdwn" id="playback_dropdown" onchange="compressorDropChange(this.selectedIndex);">
+                <option selected>normal ratio</option>
+                <option>low ratio</option>
+                <option>high ratio</option>
+                <option>normal ratio, hard knee</option>
+                <option>low ratio, hard knee</option>
+                <option>high ratio, hard knee</option>
+               </select></label>
+             </div>
+             <paper-slider id='volume_slider' pin value="{{compressor_setting_proxy}}" immediateValue="{{compressor_setting}}"></paper-slider>
+            </div>
 
-         </div>
-        </template>
+       </div>
 
-        <template if="{{samples_visible}}">
-        <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
-        
-        <div class="sliders">
-         <span class="spanny">Sample Pitch: {{}}</span>
-         <paper-slider pin value="{{}}"></paper-slider>
-        <br>
-         <span class="spanny">Sample Delay: {{}}</span>
-         <paper-slider pin value="{{}}"></paper-slider>
-        
-         </div>
+     </div>
+     </div>
 
-         </div>
-        </template>
+   <div style="{{effects_visible}}">
+   	<!--effects: pitch/bitcrush, delay, volume/pan-->
 
-        </div> <!--end MIDDLE container-->
+      <div horizontal layout class="drumkit_container">
 
-      </div>
-      <ul flex one id="beat_row_2" layout vertical>
-        <paper-shadow flex id="i" class="s" draggable="false"></paper-shadow>
-        <paper-shadow flex id="j" class="s"></paper-shadow>
-        <paper-shadow flex id="k" class="s"></paper-shadow>
-        <paper-shadow flex id="l" class="s"></paper-shadow>
-        <paper-shadow flex id="m" class="s"></paper-shadow>
-        <paper-shadow flex id="n" class="s"></paper-shadow>
-        <paper-shadow flex id="o" class="s"></paper-shadow>
-        <paper-shadow flex id="p" class="s"></paper-shadow>
-      </ul>
-    </div>
-    <ul flex one id="beat_row_3" layout horizontal reverse>
-      <paper-shadow flex id="q" class="s"></paper-shadow>
-      <paper-shadow flex id="r" class="s"></paper-shadow>
-      <paper-shadow flex id="s" class="s"></paper-shadow>
-      <paper-shadow flex id="t" class="s"></paper-shadow>
-      <paper-shadow flex id="u" class="s"></paper-shadow>
-      <paper-shadow flex id="v" class="s"></paper-shadow>
-      <paper-shadow flex id="w" class="s"></paper-shadow>
-      <paper-shadow flex id="x" class="s"></paper-shadow>
-      </ul>
-  </div>
+       <div class="fx" flex six vertical layout around-justified>
+       	<div flex one horizontal layout justified class="spanny">
+          <span style="white-space: nowrap;"><span id="sound_span" style="cursor: pointer; cursor: hand;">
+          Sound </span><b>{{sample_selected}}:</b></span>
+   	    <label><select class="dropdwn" id="sample_dropdwn" onchange="effectDropChange(this.value);" name="type">
+           <option selected value="pf">pitch / fade</option>
+           <option value="pc">pan / crush</option>
+           <option value="d">delay</option>
+         </select></label>
+        </div>
 
-  <!--<content></content>-->
+       <div flex eight id="xy_bounder">
+       <paper-button  onclick='return false;' id="xy">
+       	<!--<img id="thing" src="http://www.kirupa.com/images/smiley_red.png">-->
+       	<div id="thing"></div>
+       </paper-button>
+       </div>
+
+       <div flex one horizontal layout around-justified class="spanny" style="margin-top: 0px; padding-right:12px;">
+       		
+       		<span id="fx_uispan1" style="white-space: nowrap; ">
+       					<svg id="fx_svg1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 60 100" xml:space="preserve">
+    					<polyline id="fxxpolyline" style="fill:none;stroke:black;stroke-width:6;" stroke-linecap="round" stroke-linejoin="round" points="0.375,20.375 45.63,58.087 0.375,95.8 "/></svg>
+       		<span id="fx_ui1" style="cursor: pointer; cursor: hand;">Pitch: </span><b>{{x_pos}}</b></span>
+
+       		<span style="white-space: nowrap;margin-top:1px;" >
+    					<svg id="fx_svg2" viewBox="0 0 90 50" xml:space="preserve">
+    					<polyline style="fill:none;stroke:black;stroke-width:6" stroke-linecap="round" stroke-linejoin="round" points="0.375,38.087 38.087,0.375 75.8,38.087 "/></polyline></svg>
+       		<span id="fx_ui2" style="cursor: pointer; cursor: hand;">Fade: </span><b>{{y_pos}}</b></span>
+
+       </div>
+
+       </div>
+       
+       <paper-vertical-tabs flex one id="tabsamples" class="vert" selected="{{sample_selected}}" self-end>
+          <paper-tab id="t1" on-tap="{{play_samp1}}" name="1"></paper-tab>
+          <paper-tab id='t2' on-tap="{{play_samp2}}" name="2"></paper-tab>
+          <paper-tab id='t3' on-tap="{{play_samp3}}" name="3"></paper-tab>
+          <paper-tab id='t4' on-tap="{{play_samp4}}" name="4"></paper-tab>
+          <paper-tab id='t5' on-tap="{{play_samp5}}" name="5"></paper-tab>
+          <paper-tab id='t6' on-tap="{{play_samp6}}" name="6"></paper-tab>
+          <paper-tab id='t7' on-tap="{{play_samp7}}" name="7"></paper-tab>
+          <paper-tab id='t8' on-tap="{{play_samp8}}" name="8"></paper-tab>
+      </paper-vertical-tabs>
+     </div>
+   </div>
+
+</div> <!--end MIDDLE container-->
+
+</div>
+<ul flex one id="beat_row_2" layout vertical>
+  <paper-shadow flex id="i" class="s" draggable="false"></paper-shadow>
+  <paper-shadow flex id="j" class="s"></paper-shadow>
+  <paper-shadow flex id="k" class="s"></paper-shadow>
+  <paper-shadow flex id="l" class="s"></paper-shadow>
+  <paper-shadow flex id="m" class="s"></paper-shadow>
+  <paper-shadow flex id="n" class="s"></paper-shadow>
+  <paper-shadow flex id="o" class="s"></paper-shadow>
+  <paper-shadow flex id="p" class="s"></paper-shadow>
+</ul>
+</div>
+<ul flex one id="beat_row_3" layout horizontal reverse>
+  <paper-shadow flex id="q" class="s"></paper-shadow>
+  <paper-shadow flex id="r" class="s"></paper-shadow>
+  <paper-shadow flex id="s" class="s"></paper-shadow>
+  <paper-shadow flex id="t" class="s"></paper-shadow>
+  <paper-shadow flex id="u" class="s"></paper-shadow>
+  <paper-shadow flex id="v" class="s"></paper-shadow>
+  <paper-shadow flex id="w" class="s"></paper-shadow>
+  <paper-shadow flex id="x" class="s"></paper-shadow>
+</ul>
+</div>
+
+<!--<content></content>-->
 </template>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
+<script type="text/javascript" src="prefixfree.min.js"></script>
+<!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
-<script type="text/javascript" src="buffer-loader.js"></script>
+<script type="text/javascript" src="buffer-loader.js"></script>-->
 <script>
 
 
-	
+function getPosition(element) {
+    var xPosition = 0;
+    var yPosition = 0;
+      
+    while (element) {
+        xPosition += (element.offsetLeft - element.scrollLeft + element.clientLeft);
+        yPosition += (element.offsetTop - element.scrollTop + element.clientTop);
+        element = element.offsetParent;
+    }
+
+    return { x: xPosition, y: yPosition };
+};
+
+
+//THESE MATHS are the inverse of what is in the click function.
+function scaleToX(x) {
+  if (window.innerWidth<480) {
+  	var xval=x/1.37;
+  }
+  else {
+  	var xval=x/1.0417;
+  }
+  return xval;
+}
+function scaleToY(y) {
+  if (window.innerWidth<480) {
+  	var yval=(y*-1)/.8772+114-24;
+  }
+  else {
+  	var yval=(y*-1)/.7576+132-23;
+  }
+  return yval;
+}
+
+
+
+
+function effectDropChange(index) {
+
+  Beats.effect_selected = index;
+	//DEEP SHADOW DOM SEARCHING
+	var getter = document.querySelector('html /deep/ #fx_ui1');
+	var getter2 = document.querySelector('html /deep/ #fx_ui2');
+    var bc = document.querySelector('beat-card');
+    var samp = bc.sample_selected;
+	if (index=='pf') {
+	  getter.innerHTML = "Pitch: "; getter2.innerHTML = "Fade: ";
+      bc.x_pos = Beats.FX.pitch[samp];
+      bc.y_pos = Beats.FX.gain[samp];
+      Beats.theThing.style.transition='left 0s ease-in, top 0s ease-in';
+      Beats.theThing.style.borderRadius='10px'
+      Beats.theThing.style.height='10px';
+      Beats.theThing.style.width='10px';
+      Beats.theThing.style.border='5px solid ' + color_array[samp-1];
+      Beats.theThing.style.left = scaleToX(Beats.FX.pitch[samp])+'px';
+      Beats.theThing.style.top = scaleToY(Beats.FX.gain[samp])+'px';
+	}
+	else if (index=='pc') {
+		getter.innerHTML ="Pan: "; getter2.innerHTML = "Crush: ";
+    	bc.x_pos = Beats.FX.pan[samp];
+    	bc.y_pos = Beats.FX.crush[samp];
+    	Beats.theThing.style.transition='left 0s ease-in, top 0s ease-in';
+        Beats.theThing.style.borderRadius='0px';
+        Beats.theThing.style.height='8px';
+        Beats.theThing.style.width='8px';
+        Beats.theThing.style.border='5px solid ' + color_array[samp-1];
+    	Beats.theThing.style.left = scaleToX(Beats.FX.pan[samp])+'px';
+        Beats.theThing.style.top = scaleToY(Beats.FX.crush[samp])+'px';
+	}
+	else if (index=='d') {
+		getter.innerHTML ="Repeat: "; getter2.innerHTML = "Time: ";
+	    bc.x_pos = Beats.FX.delay_fb[samp];
+	    bc.y_pos = Beats.FX.delay_time[samp];
+	    Beats.theThing.style.transition='left 0s ease-in, top 0s ease-in';
+        Beats.theThing.style.borderRadius='7px';
+        Beats.theThing.style.height='0px';
+        Beats.theThing.style.width='0px';
+        Beats.theThing.style.border='9px double ' + color_array[samp-1];
+	    Beats.theThing.style.left = scaleToX(Beats.FX.delay_fb[samp])+'px';
+        Beats.theThing.style.top = scaleToY(Beats.FX.delay_time[samp])+'px';
+	}
+toggleThingYellow(samp, index);
+
+  
+};
+
+
+function compressorDropChange(index) {
+	if (index==0) {
+		Beats.compressor_yo.knee.value= 40;//set these as well in index.html
+        Beats.compressor_yo.ratio.value=12; 
+	}
+	else if (index==1) {
+		Beats.compressor_yo.knee.value= 40;
+        Beats.compressor_yo.ratio.value=4;
+	}
+	else if (index==2) {
+		Beats.compressor_yo.knee.value= 40;
+        Beats.compressor_yo.ratio.value=48;
+	}
+	else if (index==3) {
+		Beats.compressor_yo.knee.value= 6;
+        Beats.compressor_yo.ratio.value=12;
+	}
+	else if (index==4) {
+		Beats.compressor_yo.knee.value= 6;
+        Beats.compressor_yo.ratio.value=4;
+	}
+	else if (index==5) {
+		Beats.compressor_yo.knee.value= 6;
+        Beats.compressor_yo.ratio.value=48;
+	}
+	console.log('ratio: ',Beats.compressor_yo.ratio.value,':1');
+	console.log('knee: ',Beats.compressor_yo.knee.value,' dB');
+
+};
+
+function filterDropChange(index) {
+  //lpf=0 hpf=1
+  if (index==0) {
+    Beats.filter_yo.type = 'lowpass';
+    Beats.filter_yo.Q.value = 4;
+  }
+  else if (index==1) {
+    Beats.filter_yo.type = 'highpass';
+    Beats.filter_yo.Q.value = 4;
+  }
+  else if (index==2) {
+    Beats.filter_yo.type = 'lowpass';
+    Beats.filter_yo.Q.value = 12;
+  }
+  else if (index==3) {
+    Beats.filter_yo.type = 'highpass';
+    Beats.filter_yo.Q.value = 12;
+  }
+  else if (index==4) {
+    Beats.filter_yo.type = 'lowpass';
+    Beats.filter_yo.Q.value = 24;
+  }
+  else if (index==5) {
+    Beats.filter_yo.type = 'highpass';
+    Beats.filter_yo.Q.value = 24;
+  }
+  console.log('filter Q: ',Beats.filter_yo.Q.value,' dB');
+};
+
+//maybe do this POLYMER way instead...
+function reverbDropChange(index) {
+  //window.electedreverb = index;
+  Beats.convolver_yo.buffer = bufferListy[(index+8)];
+  //ANOTHER WAY TO ACCESS THE SHADOW DOM
+  //var getter = document.querySelector('html /deep/ #reverbselect');//.children[index];
+};
+
 
 //DRAG N DROP FROM POLYMER core-drag-drop
 addEventListener('drag-start', function(e) {
@@ -299,8 +741,8 @@ function drop(dragInfo) {
     dropTarget.style.backgroundColor = color;
     var id_name=dropTarget.id;
     console.log(color);
-    //assign the sound/color to the place in beats_array
-    beats_array[div_array.indexOf(id_name)]=color_array.indexOf(color)+1;
+    //assign the sound/color to the place in Beats.beats_array
+    Beats.beats_array[div_array.indexOf(id_name)]=color_array.indexOf(color)+1;
   }
 }
 
@@ -309,16 +751,15 @@ function drop(dragInfo) {
 
 
 //this is where the real stuff goes down
-function play_yo_yo(filter_cutoff_yo) {
+function play_yo_yo(bc) {
 
 
-		if (Beats.setting==0) {
+  if (Beats.setting==0) {
           //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
           Beats.id_yo[Beats.setting].setZ(0);
           Beats.id_yo[Beats.setting].style.opacity="1.0";
           Beats.id_yo[Beats.id_yo.length-1].setZ(1);
           Beats.id_yo[Beats.id_yo.length-1].style.opacity="0.6"
-          
         }
         else {
          //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
@@ -326,162 +767,622 @@ function play_yo_yo(filter_cutoff_yo) {
          Beats.id_yo[Beats.setting].style.opacity="1.0";
          Beats.id_yo[(Beats.setting-1)].setZ(1);
          Beats.id_yo[(Beats.setting-1)].style.opacity="0.6"
-        }
-      
-      var startTime = Audiocontext.currentTime + 0.100;
+       }
 
-      if (beats_array[Beats.setting]==1) {
-      	playSound(bufferListy[0], startTime, filter_cutoff_yo);
+       var startTime = Audiocontext.currentTime + 0.100;
+
+       var samp = Beats.beats_array[Beats.setting];
+       if (samp !=0) {
+       	//console.log(samp);
+        playSound(bufferListy[samp-1], startTime, samp, bc);
       }
-      else if (beats_array[Beats.setting]==2) {
-      	playSound(bufferListy[1], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==3) {
-      	playSound(bufferListy[2], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==4) {
-        playSound(bufferListy[3], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==5) {
-        playSound(bufferListy[4], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==6) {
-        playSound(bufferListy[5], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==7) {
-        playSound(bufferListy[6], startTime, filter_cutoff_yo);
-      }
-      else if (beats_array[Beats.setting]==8) {
-        playSound(bufferListy[7], startTime, filter_cutoff_yo);
-      }
+
 
       Beats.setting = Beats.setting +1;
       if (Beats.setting>31) {
         Beats.setting=0;
         
+      }
     }
-}
 
 //de-mute audio on IOS...
 function unmute_ios(bufferList) {
-    var hihat = bufferList[2];
+  var hihat = bufferList[2];
     // We'll start playing the rhythm 100 milliseconds from "now"
     var startTime = Audiocontext.currentTime + 0.100;
-    playSound(hihat, startTime);
+    playSound(hihat, startTime, 3);
+  }
+
+
+
+ var div_array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+ 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+ 'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+ 'y', 'z', 'za', 'zb', 'zc', 'zd', 'ze', 'zf'];
+ var color_array = ['rgb(92, 107, 192)', 'rgb(255, 152, 0)', 'rgb(76, 175, 80)', 'rgb(33, 150, 243)', 'rgb(158, 224, 3)', 'rgb(171, 71, 188)',
+ 'rgb(239, 83, 80)', 'rgb(141, 110, 99)'];
+
+
+
+
+function shuffleDelayNodes(samp) {
+  //console.log('');
+  if (Beats.FX.delay_time[samp] > 0 && Beats.delay_on[samp]==false) {
+    //check for crush
+    if (Beats.crush_on[samp]==true) {
+      Beats.crush_nodes[samp].connect(Beats.delay_nodes[samp]);
+    }
+    else {
+    	if (Beats.pan_on[samp]==true) {
+        	Beats.pan_nodes[samp].connect(Beats.delay_nodes[samp]);
+    	}
+    	else {
+    		Beats.gain_nodes[samp].connect(Beats.delay_nodes[samp]);
+    	}
+    }
+    //connect delay to master filter
+    Beats.delay_nodes[samp].connect(Beats.filter_yo);
+    Beats.delay_on[samp]=true;
+    console.log('delay on');
+    shuffleDelayFbNodes(samp);
+  }
+  else if (Beats.FX.delay_time[samp] > 0 && Beats.delay_on[samp]==true) {
+    shuffleDelayFbNodes(samp);
+  }
+  else {
+  	if (Beats.delay_on[samp]==true) {
+	    //check for crush, disconnect any prior nodes from delay
+	    if (Beats.crush_on[samp]==true) {
+	      Beats.crush_nodes[samp].disconnect();
+	      Beats.crush_nodes[samp].connect(Beats.filter_yo);
+	    }
+	    else {
+	    	if (Beats.pan_on[samp]==true) {
+		        Beats.pan_nodes[samp].disconnect();
+		        Beats.pan_nodes[samp].connect(Beats.filter_yo);
+	    	}
+	    	else {
+	    		Beats.gain_nodes[samp].disconnect();
+		        Beats.gain_nodes[samp].connect(Beats.filter_yo);
+	    	}
+	    }
+	    Beats.delay_on[samp]=false;
+	    console.log('delay off');
+	    shuffleDelayFbNodes(samp);
+	}
+  }
+}
+
+function shuffleDelayFbNodes(samp) {
+  if (Math.abs(Beats.FX.delay_fb[samp]) != 0 && Beats.delay_fb_on[samp]==false && Beats.delay_on[samp]==true) {
+    //feedback loop!
+    Beats.delay_nodes[samp].connect(Beats.delay_fb_nodes[samp]);
+    Beats.delay_fb_nodes[samp].connect(Beats.delay_nodes[samp]);
+    Beats.delay_fb_on[samp]=true;
+    console.log('delay feedback on');
+  }
+  else if (Math.abs(Beats.FX.delay_fb[samp]) != 0 && Beats.delay_fb_on[samp]==true && Beats.delay_on[samp]==true) {} 
+  else {
+    //no more feedback loop
+    Beats.delay_nodes[samp].disconnect();
+    Beats.delay_fb_nodes[samp].disconnect();
+    Beats.delay_nodes[samp].connect(Beats.filter_yo);
+    Beats.delay_fb_on[samp]=false;
+    console.log('delay feedback off');
+  }
+}
+
+function shuffleCrushNodes(samp) {
+	if (Beats.FX.crush[samp]>30) {
+		if (Beats.crush_on[samp]==false) {
+			if (Beats.pan_on[samp]==false) {
+				Beats.gain_nodes[samp].disconnect();
+				Beats.gain_nodes[samp].connect(Beats.crush_nodes[samp]);
+			}
+			else {
+			    Beats.pan_nodes[samp].disconnect();
+			    Beats.pan_nodes[samp].connect(Beats.crush_nodes[samp]);
+			}
+			//distortion curve made here!
+		    Beats.crush_nodes[samp].curve = makeDistortionCurve(Beats.FX.crush[samp]*2-35);
+		    //check for delay node
+		    if (Beats.delay_on[samp]==true) {
+		      Beats.crush_nodes[samp].connect(Beats.delay_nodes[samp]);
+		    }
+		    Beats.crush_nodes[samp].connect(Beats.filter_yo);
+		    Beats.crush_on[samp]=true;
+		    console.log('crush connected');
+		}
+	}
+	else {
+	  	if (Beats.crush_on[samp]==true) {
+	  		if (Beats.pan_on[samp]==true) {
+			    Beats.pan_nodes[samp].disconnect();
+			    Beats.pan_nodes[samp].connect(Beats.filter_yo);
+			}
+			else {
+				Beats.gain_nodes[samp].disconnect();
+			    Beats.gain_nodes[samp].connect(Beats.filter_yo);
+			}
+		    //check for delay node
+		    if (Beats.delay_on[samp]==true) {
+		    	if (Beats.pan_on[samp]==true) {
+		        	Beats.pan_nodes[samp].connect(Beats.delay_nodes[samp]);
+		    	}
+		    	else {Beats.gain_nodes[samp].connect(Beats.delay_nodes[samp]);}
+		    }
+		    Beats.crush_on[samp]=false;
+		    console.log('crush disconnected');
+		}
+	}
+}
+
+function shufflePanNodes(samp) {
+	//check if pan is not 0
+	if (Beats.FX.pan[samp] != 0) {
+		//check if pan is already on
+		if (Beats.pan_on[samp]==false) {
+			Beats.gain_nodes[samp].disconnect();
+			Beats.gain_nodes[samp].connect(Beats.pan_nodes[samp]);
+			if (Beats.crush_on[samp]==false && Beats.delay_on[samp]==false) {
+				Beats.pan_nodes[samp].connect(Beats.filter_yo);
+			}
+			else if (Beats.crush_on[samp]==false) {
+				Beats.pan_nodes[samp].connect(Beats.delay_nodes[samp]);
+				Beats.pan_nodes[samp].connect(Beats.filter_yo);
+			}
+			else {Beats.pan_nodes[samp].connect(Beats.crush_nodes[samp])}
+			Beats.pan_on[samp]=true;
+			console.log('pan connected')
+		}
+	}
+	else {
+		if (Beats.pan_on[samp]==true) {
+			Beats.gain_nodes[samp].disconnect();
+			if (Beats.crush_on[samp]==false && Beats.delay_on[samp]==false) {
+				Beats.gain_nodes[samp].connect(Beats.filter_yo);
+			}
+			else if (Beats.crush_on[samp]==false) {
+				Beats.gain_nodes[samp].connect(Beats.delay_nodes[samp]);
+				Beats.gain_nodes[samp].connect(Beats.filter_yo);
+			}
+			else {Beats.gain_nodes[samp].connect(Beats.crush_nodes[samp])}
+			Beats.pan_on[samp]=false;
+			console.log('pan disconnected');
+		}
+	}
 }
 
 
-var Beats = {
-  filter_yo: 50,
-  setting: 0,
-  not_playing: true,
-  responsy: [],
-  id_yo: []
-};
+function toggleThingYellow(samp, index) {
+  if (index=='pf') {
+     if (Beats.is_animating_pitch[samp]==false) {
+          Beats.theThing.style.backgroundColor='whitesmoke';
+        }
+        else {
+          Beats.theThing.style.backgroundColor='#ff0';
+        }
+  }
+  else if (index=='pc') {
+     if (Beats.is_animating_pan[samp]==false) {
+          Beats.theThing.style.backgroundColor='whitesmoke';
+        }
+        else {
+          Beats.theThing.style.backgroundColor='#ff0';
+        }
+  }
+  if (index=='d') {
+     if (Beats.is_animating_feedback[samp]==false) {
+          Beats.theThing.style.backgroundColor='whitesmoke';
+        }
+        else {
+          Beats.theThing.style.backgroundColor='#ff0';
+        }
+  }
+}
 
-var bufferListy;
-//var filter_yo;
- //the place in the pattern
+function loadFXSettings() {
+	for (i=1; i<9; i++) {
+		Beats.gain_nodes[i].gain.value=1.0-(Beats.FX.gain[i]/100);
+		var pan=Beats.FX.pan[i]/100.0;
+        var z = 1 - Math.abs(pan);
+        Beats.pan_nodes[i].setPosition(pan,0,z);
+        shuffleCrushNodes(i);
+        shuffleDelayNodes(i);
+        Beats.delay_nodes[i].delayTime.value = Math.abs(Beats.FX.delay_time[i])/100.0;
+        Beats.delay_fb_nodes[i].gain.value= (Beats.FX.delay_fb[i]/100.0)-0.1;
+	}
 
-var div_array = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
-							'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
-							'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
-							'y', 'z', 'za', 'zb', 'zc', 'zd', 'ze', 'zf'];
-var color_array = ['rgb(92, 107, 192)', 'rgb(255, 152, 0)', 'rgb(76, 175, 80)', 'rgb(33, 150, 243)', 'rgb(158, 224, 3)', 'rgb(171, 71, 188)',
-'rgb(239, 83, 80)', 'rgb(141, 110, 99)'];
-var beats_array = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+}
 
-//console.log('bang');
+function loadData() {
+	  Beats.beats_array = Beats.responsy.beats_array;
+      this.filter_cutoff = Beats.responsy.filter_cutoff;
+      this.reverb_setting = Beats.responsy.reverb_setting;
+      Beats.reverb_on = Beats.responsy.reverb_on;
+      this.compressor_setting = Beats.responsy.compressor_setting;
+      Beats.FX.pitch = Beats.responsy.FX.pitch;
+      Beats.FX.gain = Beats.responsy.FX.gain;
+      Beats.FX.crush = Beats.responsy.FX.crush;
+      Beats.FX.pan = Beats.responsy.FX.pan;
+      Beats.FX.delay_fb = Beats.responsy.FX.delay_fb;
+      Beats.FX.delay_time = Beats.responsy.FX.delay_time;
+      Beats.is_animating_pitch = Beats.responsy.is_animating_pitch;
+      Beats.is_animating_pan = Beats.responsy.is_animating_pan;
+      Beats.is_animating_feedback = Beats.responsy.is_animating_feedback;
+      Beats.pan_on = Beats.responsy.pan_on;
+      Beats.crush_on = Beats.responsy.crush_on;
+      Beats.delay_on = Beats.responsy.delay_on;
+      Beats.delay_fb_on = Beats.responsy.delay_fb_on;
 
+      loadFXSettings();
+
+      for (var i=0; i<32; i++) {
+        Beats.id_yo[i].style.backgroundColor = color_array[Beats.beats_array[i]-1];
+      }
+}
+
+function xhr_yo() {
+	Beats.xhr = new XMLHttpRequest();
+	Beats.xhr.onreadystatechange = function() {
+		if (Beats.xhr.readyState ==4) {
+			var data = JSON.parse(Beats.xhr.responseText);
+			Beats.responsy = data[0];
+			loadData();
+		}
+	}
+
+	var ts = new Date().getTime();
+	//this sets a date/time at the end of the json file, disables caching.
+	var url = 'api/beat.json?t=' + ts;
+	Beats.xhr.open('GET',url,true);
+	Beats.xhr.send(null);
+
+}
   //this Polmer call constructs the custom element. Argument is the element's prototype (like a base class)
   //mthods and properties can be initiated in here.
-Polymer('beat-card', {
+  Polymer('beat-card', {
 
+  	load_beat: function() {
+  		xhr_yo();
+  	},
 
-  ajaxResponse: function(event, response) {
-      Beats.responsy = response.response[0].beat;
+    bpm_yo: 220,
+    bpm_yoChanged: function() {
+      console.log('bpm changed');
+      this.speed_setting = 60000/this.bpm_yo;
+    },
+    speed_setting: 273,
+
+    central_selected: 'kit',
+
+    central_selectedChanged: function() {
+      if (this.central_selected=='kit') {
+        this.drumkit_visible = 'display: block;';
+        this.effects_visible = 'display: none;';
+        this.levels_visible = 'display: none;';
+      }
+      else if (this.central_selected=='effects') {
+         this.drumkit_visible = 'display: none;';
+         this.effects_visible = 'display: block;';
+         this.levels_visible = 'display: none;';
+         //var getter1 = this.$.samples_div.querySelector('#reverbselect');
+         //getter1.selectedIndex = window.Beats.selectedreverb;
+      }
+      else if (this.central_selected=='master') {
+         this.drumkit_visible = 'display: none;';
+         this.effects_visible = 'display: none;';
+         this.levels_visible = 'display: block;';
+      }
+      //console.log('select this', this)  HERE THIS = BEAT-CARD
+    },
+      
+
+    sample_pitch: 50,
+    sample_pitch_proxy: 50,
+
+    sample_level: 50,
+    sample_level_proxy: 50,
+
+    sample_selected: 1,
+    sample_selectedChanged: function() {
+      //THIS IS HOW YOU REACH THE SHADOW DOM!!!!!!!!!!!!!!!!!!!!!!!!
+      var getter = this.shadowRoot.querySelector('#xy');
+        getter.style.borderColor=color_array[this.sample_selected-1];
+        var getter2=this.$.xy_bounder;
+        getter2.style.borderColor=color_array[this.sample_selected-1];
+        
+
+        Beats.theThing.style.borderColor=color_array[this.sample_selected-1];
+        Beats.theThing.style.transition='left 0s ease-in, top 0s ease-in';
+        if (Beats.effect_selected=='pf') {
+        	Beats.theThing.style.left = scaleToX(Beats.FX.pitch[this.sample_selected])+'px';
+        	Beats.theThing.style.top = scaleToY(Beats.FX.gain[this.sample_selected])+'px';
+        	this.x_pos=Beats.FX.pitch[this.sample_selected];
+        	this.y_pos=Beats.FX.gain[this.sample_selected];
+      	}
+      	if (Beats.effect_selected=='pc') {
+          	Beats.theThing.style.left = scaleToX(Beats.FX.pan[this.sample_selected])+'px';
+          	Beats.theThing.style.top = scaleToY(Beats.FX.crush[this.sample_selected])+'px';
+          	this.x_pos=Beats.FX.pan[this.sample_selected];
+          	this.y_pos=Beats.FX.crush[this.sample_selected];
+      	}
+      	if (Beats.effect_selected=='d') {
+          	Beats.theThing.style.left = scaleToX(Beats.FX.delay_fb[this.sample_selected])+'px';
+          	Beats.theThing.style.top = scaleToY(Beats.FX.delay_time[this.sample_selected])+'px';
+          	this.x_pos=Beats.FX.delay_fb[this.sample_selected];
+          	this.y_pos=Beats.FX.delay_time[this.sample_selected];
+      	}
+        toggleThingYellow(this.sample_selected, Beats.effect_selected);
+    },
+
+    compressor_setting: 30,
+    compressor_setting_proxy: 30,
+
+    compressor_settingChanged: function() {
+      Beats.compressor_yo.threshold.value = (0-this.compressor_setting);
+      Beats.compressorSetting=this.compressor_setting;
+
+      //Beats.levels[Beats.level_selected]=this.compressor_setting;
+      //Beats.gain_nodes[Beats.level_selected].gain.value = (this.compressor_setting/100.0);
+    },
+
+    filter_cutoff: 100,
+    filter_cutoff_proxy: 100,
+
+    reverb_setting: 30,
+    reverb_setting_proxy: 30,
+
+  //AWESOME just add Changed for an automatic EventListener
+  filter_cutoffChanged: function() {
+  	var minValue = 40;
+  	var maxValue = 22050;
+  	//this math taken from HTML5rocks web audio page by Boris Smus
+  	var numberOfOctaves = Math.log(maxValue / minValue) / Math.LN2; //natural logarithm of 2 = 0.693
+  	var multiplier = Math.pow(2, numberOfOctaves * (this.filter_cutoff/100.0 - 1.0));
+    Beats.filterCutoff = maxValue * multiplier;
+    Beats.filter_yo.frequency.value = Beats.filterCutoff+1;
   },
 
-  load_beat: function() {
-          beats_array = Beats.responsy;
-          for (var i=0; i<32; i++) {
-            Beats.id_yo[i].style.backgroundColor = color_array[beats_array[i]-1];
-          }
-  },
+  reverb_settingChanged: function() {
+    if (this.reverb_setting==0 && Beats.reverb_on==true) {
+      Beats.wetGainNode.disconnect();
+      Beats.reverb_on=false;
+      console.log('reverb disconnected');
+    }
+    else if (this.reverb_setting!=0 && Beats.reverb_on==true) {}
+    else {
+      Beats.wetGainNode.connect(Beats.convolver_yo);
+      Beats.reverb_on=true;
+      console.log('reverb connected');
+    }
 
-  age: 25,
-
-  speed_setting: 50,
-  speed_setting_proxy: 50,
-
-  filter_cutoff: 50,
-  filter_cutoff_proxy: 50,
+    Beats.reverbSetting = this.reverb_setting;
+    Beats.dryGainNode.gain.value = 1-(Beats.reverbSetting/100.0);
+    Beats.wetGainNode.gain.value = (Beats.reverbSetting/100.0);
     
-  	play_toggle: "Play",
+  },
+
+  play_toggle: "Play",
+
+  getClickPosition: function(e) {
+  	e.preventDefault();
+    var parentPosition = getPosition(e.currentTarget);
+    var offsetx;
+    var offsety;
+    
+    var xPosition = e.clientX - parentPosition.x; //- (Beats.theThing.clientWidth / 2 );
+    var yPosition = e.clientY - parentPosition.y; //- (Beats.theThing.clientHeight / 2);
+
+    //HERE IS THE MATH to set the div position and scale to 100
+    if (window.innerWidth<480) {
+    	offsetx = 74;
+    	offsety = 23;
+    	x_poss=(xPosition-73)*1.37;      // 100 / 73 = 1.37       73 is half the x length
+    	y_poss=(114-yPosition)*.8772;    // 100 / 114 = .8772     114 is the y length
+    }
+    else {
+    	offsetx = 98;
+    	offsety = 22;
+    	x_poss=(xPosition-96)*1.0417;
+    	y_poss=(132-yPosition)*.7576;
+    }
+    //set position
+    Beats.theThing.style.transition='left .2s ease-in, top .2s ease-in';
+
+    Beats.theThing.style.left = (xPosition-offsetx) + "px";
+    Beats.theThing.style.top = (yPosition-offsety) + "px";
+
+    //console.log(this);
+    //THIS was the paper-button, and bind(this) returned window
+    //so querying the ELEMENT BEAT-CARD gives access to set published properties
+    //(which are usually accessed in Polymer with simply this.)
+    var bc = document.querySelector('beat-card');
+    var samp = bc.sample_selected;
+    //now round to integer
+    bc.x_pos = Math.round(x_poss);
+    bc.y_pos = Math.round(y_poss);
+
+    if (Beats.effect_selected=='pf') {
+    	Beats.FX.pitch[samp]=Math.round(x_poss);
+		Beats.FX.gain[samp] =Math.round(y_poss);
+		Beats.gain_nodes[samp].gain.value=1.0-(Beats.FX.gain[samp]/100);
+  	}
+  	else if (Beats.effect_selected=='pc') {
+      Beats.FX.pan[samp]=Math.round(x_poss);
+  		Beats.FX.crush[samp] = Math.round(y_poss);
+      var pan=Beats.FX.pan[samp]/100.0;
+      var z = 1 - Math.abs(pan);
+      Beats.pan_nodes[samp].setPosition(pan,0,z);
+      shufflePanNodes(samp);
+      shuffleCrushNodes(samp);
+      //disconnect pan nodes if inactive...?
+  	}
+  	else if (Beats.effect_selected=='d') {
+      Beats.FX.delay_fb[samp]=Math.round(x_poss);
+  		Beats.FX.delay_time[samp] = Math.round(y_poss);
+      shuffleDelayNodes(samp);
+      Beats.delay_nodes[samp].delayTime.value = Math.abs(Beats.FX.delay_time[samp])/100.0;
+      Beats.delay_fb_nodes[samp].gain.value= (Beats.FX.delay_fb[samp]/100.0)-0.1;
+  	}
+  },
+
+  //these two are out of 100
+  x_pos: 0,
+  y_pos: 0,
+  x_posChanged: function() {
+  		var svgthing = this.$.fxxpolyline;
+  		if (this.x_pos<0) {
+  			svgthing.setAttribute("points","45.63,20.375 0.375,58.087 45.63,95.8");
+  		}
+  		else {svgthing.setAttribute("points","0.375,20.375 45.63,58.087 0.375,95.8");}
+  },
+  y_posChanged: function() {
+  },
+
+  fxui1_click: function() {
+    //click the name of the effect to turn it off
+ 		var bc = document.querySelector('beat-card');
+    var samp = bc.sample_selected;
+    	bc.x_pos = 0;
+    	if (window.innerWidth<480) {
+    		Beats.theThing.style.left = "0px";
+    	}
+    	else {Beats.theThing.style.left="0px";}
+
+    	Beats.theThing.style.transition='left .2s ease-in, top .2s ease-in';
+
+
+      if (Beats.effect_selected=='pf') {
+        Beats.FX.pitch[samp]=0;
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_pitch[samp]=false;
+        Beats.theThing.style.left = scaleToX(Beats.FX.pitch[bc.sample_selected])+'px';
+      }
+      else if (Beats.effect_selected=='pc') {
+        Beats.FX.pan[samp]=0;
+        Beats.pan_nodes[samp].setPosition(0,0,0);
+        //shuffleCrushNodes(samp);
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_pan[samp]=false;
+        Beats.theThing.style.left = scaleToX(Beats.FX.pan[bc.sample_selected])+'px';
+        shufflePanNodes(samp);
+        //disconnect pan nodes if inactive?
+      }
+      else if (Beats.effect_selected=='d') {
+        Beats.FX.delay_fb[samp]=0;
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_feedback[samp]=false;
+        Beats.theThing.style.left = scaleToX(Beats.FX.delay_fb[bc.sample_selected])+'px';
+        shuffleDelayNodes(samp);
+    }
+  },
+  fxui2_click: function() {
+ 		var bc = document.querySelector('beat-card');
+    var samp = bc.sample_selected;
+    	bc.y_pos = 0;
+    	if (window.innerWidth<480) {
+    		Beats.theThing.style.top = "90px";
+    	}
+    	else {Beats.theThing.style.top= "109px";}
+
+      if (Beats.effect_selected=='pf') {
+        Beats.FX.gain[samp] =0;
+      }
+      else if (Beats.effect_selected=='pc') {
+        Beats.FX.crush[samp] = 0;
+        shuffleCrushNodes(samp);
+      }
+      else if (Beats.effect_selected=='d') {
+        Beats.FX.delay_time[samp] = 0;
+        shuffleDelayNodes(samp);
+      }
+  },
+
+  sound_click: function() {
+    var bc = document.querySelector('beat-card');
+    var samp = bc.sample_selected;
+
+    Beats.theThing.style.transition='left .2s ease-in, top .2s ease-in';
+
+    if (Beats.effect_selected=='pf') {
+      if (Beats.is_animating_pitch[samp]==false) {
+        Beats.theThing.style.backgroundColor='#ff0';
+        Beats.is_animating_pitch[samp]=true;
+      }
+      else {
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_pitch[samp]=false;
+        Beats.theThing.style.left = scaleToX(Beats.FX.pitch[bc.sample_selected])+'px';
+        bc.x_pos=Beats.FX.pitch[bc.sample_selected];
+      }
+    }
+    if (Beats.effect_selected=='pc') {
+      if (Beats.is_animating_pan[samp]==false) {
+        Beats.theThing.style.backgroundColor='#ff0';
+        Beats.is_animating_pan[samp]=true;
+      }
+      else {
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_pan[samp]=false;
+          var pan=Beats.FX.pan[samp]/100.0;
+	      var z = 1 - Math.abs(pan);
+	      Beats.pan_nodes[samp].setPosition(pan,0,z);
+        Beats.theThing.style.left = scaleToX(Beats.FX.pan[bc.sample_selected])+'px';
+        bc.x_pos=Beats.FX.pan[bc.sample_selected];
+      }
+    }
+    if (Beats.effect_selected=='d') {
+      if (Beats.is_animating_feedback[samp]==false) {
+        Beats.theThing.style.backgroundColor='#ff0';
+        Beats.is_animating_feedback[samp]=true;
+      }
+      else {
+        Beats.theThing.style.backgroundColor='whitesmoke';
+        Beats.is_animating_feedback[samp]=false;
+        Beats.theThing.style.left = scaleToX(Beats.FX.delay_fb[bc.sample_selected])+'px';
+        bc.x_pos=Beats.FX.delay_fb[bc.sample_selected];
+      }
+    }
+  },
+
+  pitch_anim: [0,0,0,0,0,0,0,0,0],
+  
+  pan_anim: [0,0,0,0,0,0,0,0,0],
+
+  feedback_anim: [0,0,0,0,0,0,0,0,0],
 
     //ready method is called when Polymer finished initialization
     ready: function() {
 
-    	var beatstabs=this.$.beat_container.querySelector('paper-tabs');
-    	beatstabs.addEventListener('core-select', function() {
-    		if (beatstabs.selected=='kit') {
-    			this.drumkit_visible = true;
-        		this.effects_visible = false;
-        		this.samples_visible = false;
-    		}
-    		if (beatstabs.selected=='effects') {
-    			this.drumkit_visible = false;
-        		this.effects_visible = true;
-        		this.samples_visible = false;
-    		}
-    		if (beatstabs.selected=='samples') {
-    			this.drumkit_visible = false;
-        		this.effects_visible = false;
-        		this.samples_visible = true;
-    		}
-    	}.bind(this));
+    	var xy_yo=this.$.xy;
+    	var thing=this.$.thing;
+    	xy_yo.addEventListener("click", this.getClickPosition, false);
+    		//this is a way to make a div an object, easy to access...
+		  Beats.theThing = thing;
+
+		  var fxui1=this.$.fx_ui1;
+    	  fxui1.addEventListener("click", this.fxui1_click, false);
+    	  var fxui2=this.$.fx_ui2;
+    	  fxui2.addEventListener("click", this.fxui2_click, false);
+
+      var soundy=this.$.sound_span;
+      soundy.addEventListener("click", this.sound_click, false);
+		 
+		  if (window.innerWidth<480) {
+		  	xy_yo.setAttribute('recenteringTouch','true')
+		  }
+		  else {
+		  	xy_yo.setAttribute('recenteringTouch','false')
+		  }
 
       //HIDE WITH THIS PUBLISHED PROPERTY, CAN BE ACESSED FROM OUTSIDE!!!!
-      this.drumkit_visible = true;
-      this.effects_visible = false;
-      this.samples_visible = false;
+      this.drumkit_visible = 'display: block;';
+      this.effects_visible = 'display: none;';
+      this.levels_visible = 'display: none;';
 
-      try {
-        window.AudioContext = window.AudioContext||window.webkitAudioContext; //WEBKIT FOR SAFARI 
-        Audiocontext = new AudioContext();
-        }
-      catch(e) {
-        alert("dang yo, Web Audio API is not supported in this browser");
-      }
-    
-
-    // Start loading the drum kit.
-    //bufferLoader class from Middle Ear Media tutorial on Web Audio Api
-    bufferLoader = new BufferLoader(
-        Audiocontext,
-        [
-        "/beats/sounds/kick.wav",
-        "/beats/sounds/snare.wav",
-        "/beats/sounds/hihat.wav",
-        "/beats/sounds/Kick808.wav",
-        "/beats/sounds/ohat.wav",
-        "/beats/sounds/jawharp.wav",
-        "/beats/sounds/clap.wav",
-        "/beats/sounds/tic.wav"
-        ],
-        bufferLoadCompleted  
-    );
-
-    bufferLoader.load();
-
-    function bufferLoadCompleted() {
-      //YES this empty function makes it work on firefox/safari!!!! I dont know why...
-    }
-
-    bufferListy=bufferLoader.bufferList; //this line added, works now
-
-    Beats.filter_yo = Audiocontext.createBiquadFilter();
-
+      this.x_pos = 0;
+      this.y_pos=0;
       //make the id_yo list of paper-shadow elements
       var id_list = this.$.beat_container.querySelectorAll('.s');
       Beats.id_yo = Array.prototype.slice.call(id_list, 0);
@@ -493,66 +1394,56 @@ Polymer('beat-card', {
         return 0;
       });
 
-  	},
+    },//END READY
 
-  	
 
-  	play_samp1: function() {
-  			var kick = bufferListy[0];
-  			var filter_cutoff_yo = this.filter_cutoff;
-  			var startTime = Audiocontext.currentTime + 0.100;
-      	playSound(kick, startTime, filter_cutoff_yo);
-  	},
 
-  	play_samp2: function() {
-  			var snare = bufferListy[1];
-  			var filter_cutoff_yo = this.filter_cutoff;
-  			var startTime = Audiocontext.currentTime + 0.100;
-      	playSound(snare, startTime, filter_cutoff_yo);
-  	},
+    play_samp1: function() {
+     var startTime = Audiocontext.currentTime + 0.100;
+     playSound(bufferListy[0], startTime, 1, this);
+   },
 
-  	play_samp3: function() {
-  			var hihat = bufferListy[2];
-  			var filter_cutoff_yo = this.filter_cutoff;
-  			var startTime = Audiocontext.currentTime + 0.100;
-      	playSound(hihat, startTime, filter_cutoff_yo);
-  	},
+   play_samp2: function() {
+     var startTime = Audiocontext.currentTime + 0.100;
+     playSound(bufferListy[1], startTime, 2, this);
+   },
 
-    play_samp4: function() {
-        var filter_cutoff_yo = this.filter_cutoff;
-        var startTime = Audiocontext.currentTime + 0.100;
-        playSound(bufferListy[3], startTime, filter_cutoff_yo);
-    },
+   play_samp3: function() {
+     var startTime = Audiocontext.currentTime + 0.100;
+     playSound(bufferListy[2], startTime, 3, this);
+   },
 
-    play_samp5: function() {
-        var filter_cutoff_yo = this.filter_cutoff;
-        var startTime = Audiocontext.currentTime + 0.100;
-        playSound(bufferListy[4], startTime, filter_cutoff_yo);
-    },
+   play_samp4: function() {
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(bufferListy[3], startTime, 4, this);
+  },
 
-    play_samp6: function() {
-        var filter_cutoff_yo = this.filter_cutoff;
-        var startTime = Audiocontext.currentTime + 0.100;
-        playSound(bufferListy[5], startTime, filter_cutoff_yo);
-    },
+  play_samp5: function() {
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(bufferListy[4], startTime, 5, this);
+  },
 
-    play_samp7: function() {
-        var filter_cutoff_yo = this.filter_cutoff;
-        var startTime = Audiocontext.currentTime + 0.100;
-        playSound(bufferListy[6], startTime, filter_cutoff_yo);
-    },
+  play_samp6: function() {
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(bufferListy[5], startTime, 6, this);
+  },
 
-    play_samp8: function() {
-        var filter_cutoff_yo = this.filter_cutoff;
-        var startTime = Audiocontext.currentTime + 0.100;
-        playSound(bufferListy[7], startTime, filter_cutoff_yo);
-    },
+  play_samp7: function() {
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(bufferListy[6], startTime, 7, this);
+  },
 
-    go_dude: function() {
+  play_samp8: function() {
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(bufferListy[7], startTime, 8, this);
+  },
 
-      
+  go_dude: function() {
 
-      speed_setting_yo = this.speed_setting;
+    var anim1;
+
+
+    //speed_setting_yo = this.speed_setting;
 
       if (Beats.not_playing==false) {
         Beats.not_playing=true;
@@ -561,21 +1452,74 @@ Polymer('beat-card', {
         buttonicon.icon = "label";
       } //end if Beats.not_playing
       else {
-    	Beats.not_playing=false;
-    	function goingyoyo() {
-    		if (Beats.not_playing==false) {
-    			var filter_cutoff_yo = this.filter_cutoff;
-	    		play_yo_yo(filter_cutoff_yo); //here's the call
-	    		this.async(goingyoyo, null, this.speed_setting*3+50);
-    		}
-    	}	
-    	this.async(goingyoyo, null, 1);
-    	this.play_toggle = "Stop";
-    	var buttonicon = this.$.topbar.querySelector('#button');
+         Beats.not_playing=false;
+         function goingyoyo() {
+            if (Beats.not_playing==false) {
+	    		play_yo_yo(this); //here's the call
+	    		anim1=(Math.abs(Beats.setting-16)-8)*12.5/100.0;
+	    		//HERE IS THE LOOP TO AUTOMATE ALL EFFECTS! 
+                for (i=1; i<9; i++) {
+                	if (Beats.is_animating_pitch[i]==true) {
+                		this.pitch_anim[i]=anim1*Beats.FX.pitch[i];
+                		//actual pitch is automatically updated in playSound, from pitch_anim
+                	}
+                	if (Beats.is_animating_pan[i]==true) {
+                		if (Beats.beats_array[Beats.setting]==i) {
+                		  var pan=Beats.FX.pan[i]*anim1/100.0;
+					      var z = 1 - Math.abs(pan);
+					      Beats.pan_nodes[i].setPosition(pan,0,z);
+                		}
+                	}
+                	if (Beats.is_animating_feedback[i]==true) {
+                		if (Beats.beats_array[Beats.setting]==i) {
+                			Beats.delay_fb_nodes[i].gain.value= (Beats.FX.delay_fb[i]*anim1/100.0)-0.1;
+                		}
+                	}
+                }
+              //AND HERE is THE UI ANIMATION...
+             if (this.central_selected=='effects') {
+             	//console.log('animating');
+              if (Beats.is_animating_pitch[this.sample_selected]==true && Beats.effect_selected=='pf') {
+              	this.x_pos=Math.round(this.pitch_anim[this.sample_selected]);
+              	var effect=Beats.FX.pitch[this.sample_selected];
+              	this.thing_anim(effect);
+              }
+              if (Beats.is_animating_pan[this.sample_selected]==true && Beats.effect_selected=='pc') {
+              	this.pan_anim[this.sample_selected]=anim1*Beats.FX.pan[this.sample_selected];
+              	this.x_pos=Math.round(this.pan_anim[this.sample_selected]);
+              	var effect=Beats.FX.pan[this.sample_selected];
+              	this.thing_anim(effect);
+              }
+              if (Beats.is_animating_feedback[this.sample_selected]==true && Beats.effect_selected=='d') {
+              	this.feedback_anim[this.sample_selected]=anim1*Beats.FX.delay_fb[this.sample_selected];
+              	this.x_pos=Math.round(this.feedback_anim[this.sample_selected]);
+              	var effect=Beats.FX.delay_fb[this.sample_selected];
+              	this.thing_anim(effect);
+              }
+             }//end if central selected == effects
+
+    	    		this.async(goingyoyo, null, this.speed_setting/2);
+        	}//end if is playing
+          }	//end recursive function
+          this.async(goingyoyo, null, 1);
+        this.play_toggle = "Stop";
+        var buttonicon = this.$.topbar.querySelector('#button');
         buttonicon.icon = "label-outline";
       }
 
-    } //end go_dude
+    }, //end go_dude
+
+    thing_anim: function(effect) {
+    	var bpms = 480/this.bpm_yo;
+        if (Beats.setting==0) {
+            	Beats.theThing.style.transition='left '+bpms+'s ease-in-out';
+            	Beats.theThing.style.left = scaleToX(effect* -1.0)+'px';
+        }
+        if (Beats.setting==15) {
+            	Beats.theThing.style.transition='left '+bpms+'s ease-in-out';
+            	Beats.theThing.style.left = scaleToX(effect)+'px';
+        }
+    }
 
 });//end Polymer
 
