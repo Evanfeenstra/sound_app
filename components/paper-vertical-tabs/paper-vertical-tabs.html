@@ -1,0 +1,16 @@
+<link rel="import" href="../core-selector/core-selector.html">
+<link rel="import" href="../paper-tabs/paper-tabs.html">
+
+<polymer-element name="paper-vertical-tabs" extends="core-selector" attributes="noink nobar" role="tablist">
+  <template>
+    <link rel="stylesheet" href="paper-vertical-tabs.css">
+
+    <div id="selectionBar" hidden?="{{nobar}}" on-transitionend="{{barTransitionEnd}}"></div>
+
+    <div id="tabsContainer" vertical layout>
+      <shadow></shadow>
+    </div>
+  </template>
+
+  <script src="paper-vertical-tabs.js"></script>
+</polymer-element>

@@ -12,8 +12,6 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="mobile-web-app-capable" content="yes">
 
-
-
   <script src="../components/webcomponentsjs/webcomponents.js">
   </script>
 
@@ -24,12 +22,19 @@
     href="../components/core-toolbar/core-toolbar.html">
   <link rel="import"
     href="../components/paper-tabs/paper-tabs.html">
+  <link rel="import"
+    href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
+    <link rel="import"
+    href="../components/paper-input/paper-input.html">
+    <link rel="import" href="../components/core-icon-button/core-icon-button.html">
+
 
   <!--<link rel="import" href="post-list.html">-->
   <link rel="import" href="beat-card.html">
   <link rel="import" href="synth-card.html">
-  <!--<link rel="import" href="components/core-scaffold/core-scaffold.html">-->
+  <link rel="import" href="topbar-card.html">
 
+  <!--<link rel="import" href="components/core-scaffold/core-scaffold.html">-->
 
   <link rel="import" href="../components/core-pages/core-pages.html">
   <!--MUST IMPORT .HTML ELEMETS!!!-->
@@ -40,19 +45,12 @@
     margin: 0;
     background-color: #E5E5E5;
     font-family: 'RobotoDraft', sans-serif;
-
-  }
-  core-header-panel {
-    height: 100%;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; 
-  }
-  core-toolbar {
-    background: #03a9f4;
-    color: white;
   }
   #tabs {
+    background: #03a9f4;
+    color: white;
     width: 100%;
+    height: 50px;
     margin: 0;
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -60,65 +58,99 @@
     user-select: none;
 	text-transform: uppercase;
   }
-  .container {
+  #tabs2 {
+    height: 320px;
+    background: #03a9f4;
+    color: white;
+    width: 75px;
+    margin: auto 0;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  text-transform: uppercase;
+  }
+  #toolbar {
+    background: #03a9f4;
+    width: 100%;
+    height: 50px;
+    position: absolute;
+  }
+  .mastercontainer {
     width: 320px;
-    margin: auto;
+  }
+  #pages {
 
   }
-  @media (min-width: 481px) {
+  
+
+  /*style for big screens*/
+  @media (min-width: 668px) {
     #tabs {
-      width: 200px;
-    }
-    .container {
       width: 400px;
     }
-  }
-  .papersheet {
-  }
-  
-  
-  
+    #tabs2 {
+      height: 400px;
+    }
+    .mastercontainer {
+      width: 400px;
+    }
+    #pages {
 
+  }
+  }
+
+  
   </style>
 
 </head>
 
+<!-- FULLBLEED body fills screen to allow for vertical centering-->
+<!--<body unresolved fullbleed vertical layout center-justified>-->
 <body unresolved>
+<div id='toolbar'>
+</div>
+<div id="ubercontainer" fit layout horizontal center-justified>
+<div layout vertical id='master' class='mastercontainer'>
 
-
-  <core-header-panel>
-
-    <core-toolbar>
-      <paper-tabs id="tabs" selected="0" self-end>
+      <paper-tabs id="tabs" selected="0" self-end block>
         <paper-tab id="beatstab" name="0">Beats</paper-tab>
         <paper-tab id="synthtab" name="1">Synth</paper-tab>
       </paper-tabs>
-    </core-toolbar>
 
-    <core-pages selected="0">
+    <paper-vertical-tabs id="tabs2" selected="0" self-end hidden>
+      <paper-tab id="beatstab" name="0">Beats</paper-tab>
+      <paper-tab id="synthtab" name="1">Synth</paper-tab>
+    </paper-vertical-tabs>
+
+
+
+
+    <topbar-card>
+    </topbar-card>
+
+
+    <core-pages id="pages" selected="0">
     <div>
-      <div class="container" layout vertical center>
         <beat-card>
         </beat-card>
-      </div>
     </div>
 
     <div>
-      <div class="container" layout vertical center>
         <synth-card>
         </synth-card>
-      </div>
     </div>
 
     </core-pages>
+</div>
+</div>
 
-  </core-header-panel>
-  <script type="text/javascript" src="buffer-loader.js"></script>
+  <script type="text/javascript" src="js/buffer-loader.js"></script>
   <script>
 
-      
-
 window.onload = init;
+
+
 
 var Audiocontext;
 var bufferLoader;
@@ -143,6 +175,7 @@ var Beats = {
   theThing: null, //this become the thing div
   effect_selected: 'pf',
   innitted: false,
+  speed_setting: 273,
 
   //all these need ability to save and load
   beats_array: [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], //main array 
@@ -167,6 +200,16 @@ var Beats = {
   is_animating_feedback: [false, false, false, false, false, false, false, false, false], 
 };
 
+function go_dude() {
+console.log('godudue')
+}
+
+function gogo() {
+  var hihat = bufferList[2];
+    // We'll start playing the rhythm 100 milliseconds from "now"
+    var startTime = Audiocontext.currentTime + 0.100;
+    playSound(hihat, startTime, 3);
+  }
 
 function makeDistortionCurve(amount) {
   var k = typeof amount === 'number' ? amount : 50,
@@ -182,7 +225,6 @@ function makeDistortionCurve(amount) {
   return curve;
 };
 
-
 function init() {
    try {
     window.AudioContext = window.AudioContext||window.webkitAudioContext; //WEBKIT FOR SAFARI 
@@ -192,15 +234,10 @@ function init() {
     alert("dang yo, Web Audio API is not supported in this browser");
    }
 
-
-      
-
-      Beats.filter_yo = Audiocontext.createBiquadFilter();
+      Beats.filter_yo = Audiocontext.createBiquadFilter(); //master filter
       Beats.filter_yo.type = 'lowpass';
       Beats.filter_yo.gain.value = 4;
       Beats.filter_yo.Q.value = 6;  //28 is high, 14 is med?
-
-
 
       //HERE ARE THE SAMPLE PATHWAYS! source->gain->pan->distort->delay->destination(filter_yo->convolver_yo->gain[0]->compressor->final destination)
       //both distort and delay are disconnected if they are inactive, to save system resources. Master reverb as well.
@@ -208,91 +245,18 @@ function init() {
       Beats.gain_nodes[0] = Audiocontext.createGain();
       Beats.gain_nodes[0].gain.value = 1.0;
 
+      for (i=1; i<9; i++) {
       //pan, distort, and delay are all disconnected to start with.
-      Beats.gain_nodes[1] = Audiocontext.createGain();
-      Beats.gain_nodes[1].gain.value = 1.0;
-      Beats.pan_nodes[1] = Audiocontext.createPanner();
-      Beats.pan_nodes[1].panningModel = "equalpower";
-      Beats.pan_nodes[1].setPosition(0,0,0); //scales from -1 to 1 on the first parameter
-      Beats.gain_nodes[1].connect(Beats.filter_yo);
-      Beats.crush_nodes[1] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[1] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[1] = Audiocontext.createGain();
-
-      Beats.gain_nodes[2] = Audiocontext.createGain();
-      Beats.gain_nodes[2].gain.value = 1.0;
-      Beats.pan_nodes[2] = Audiocontext.createPanner();
-      Beats.pan_nodes[2].panningModel = "equalpower";
-      Beats.pan_nodes[2].setPosition(0,0,0);
-      Beats.gain_nodes[2].connect(Beats.filter_yo);
-      Beats.crush_nodes[2] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[2] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[2] = Audiocontext.createGain();
-
-      Beats.gain_nodes[3] = Audiocontext.createGain();
-      Beats.gain_nodes[3].gain.value = 1.0;
-      Beats.pan_nodes[3] = Audiocontext.createPanner();
-      Beats.pan_nodes[3].panningModel = "equalpower";
-      Beats.pan_nodes[3].setPosition(0,0,0);
-      Beats.gain_nodes[3].connect(Beats.filter_yo);
-      Beats.crush_nodes[3] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[3] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[3] = Audiocontext.createGain();
-
-      Beats.gain_nodes[4] = Audiocontext.createGain();
-      Beats.gain_nodes[4].gain.value = 1.0;
-      Beats.pan_nodes[4] = Audiocontext.createPanner();
-      Beats.pan_nodes[4].panningModel = "equalpower";
-      Beats.pan_nodes[4].setPosition(0,0,0);
-      Beats.gain_nodes[4].connect(Beats.filter_yo);
-      Beats.crush_nodes[4] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[4] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[4] = Audiocontext.createGain();
-
-      Beats.gain_nodes[5] = Audiocontext.createGain();
-      Beats.gain_nodes[5].gain.value = 1.0;
-      Beats.pan_nodes[5] = Audiocontext.createPanner();
-      Beats.pan_nodes[5].panningModel = "equalpower";
-      Beats.pan_nodes[5].setPosition(0,0,0);
-      Beats.gain_nodes[5].connect(Beats.filter_yo);
-      Beats.crush_nodes[5] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[5] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[5] = Audiocontext.createGain();
-
-      Beats.gain_nodes[6] = Audiocontext.createGain();
-      Beats.gain_nodes[6].gain.value = 1.0;
-      Beats.pan_nodes[6] = Audiocontext.createPanner();
-      Beats.pan_nodes[6].panningModel = "equalpower";
-      Beats.pan_nodes[6].setPosition(0,0,0);
-      Beats.gain_nodes[6].connect(Beats.filter_yo);
-      Beats.crush_nodes[6] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[6] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[6] = Audiocontext.createGain();
-
-      Beats.gain_nodes[7] = Audiocontext.createGain();
-      Beats.gain_nodes[7].gain.value = 1.0;
-      Beats.pan_nodes[7] = Audiocontext.createPanner();
-      Beats.pan_nodes[7].panningModel = "equalpower";
-      Beats.pan_nodes[7].setPosition(0,0,0);
-      Beats.gain_nodes[7].connect(Beats.filter_yo);
-      Beats.crush_nodes[7] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[7] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[7] = Audiocontext.createGain();
-
-      Beats.gain_nodes[8] = Audiocontext.createGain();
-      Beats.gain_nodes[8].gain.value = 1.0;
-      Beats.pan_nodes[8] = Audiocontext.createPanner();
-      Beats.pan_nodes[8].panningModel = "equalpower";
-      Beats.pan_nodes[8].setPosition(0,0,0);
-      Beats.gain_nodes[8].connect(Beats.filter_yo);
-      Beats.crush_nodes[8] = Audiocontext.createWaveShaper();
-      Beats.delay_nodes[8] = Audiocontext.createDelay();
-      Beats.delay_fb_nodes[8] = Audiocontext.createGain();
-
-
-
-
-
+          Beats.gain_nodes[i] = Audiocontext.createGain();
+          Beats.gain_nodes[i].gain.value = 1.0;
+          Beats.pan_nodes[i] = Audiocontext.createPanner();
+          Beats.pan_nodes[i].panningModel = "equalpower";
+          Beats.pan_nodes[i].setPosition(0,0,0); //scales from -1 to 1 on the first parameter
+          Beats.gain_nodes[i].connect(Beats.filter_yo);
+          Beats.crush_nodes[i] = Audiocontext.createWaveShaper();
+          Beats.delay_nodes[i] = Audiocontext.createDelay();
+          Beats.delay_fb_nodes[i] = Audiocontext.createGain();
+      }
 
       Beats.convolver_yo = Audiocontext.createConvolver();
 
@@ -320,7 +284,7 @@ function init() {
       Beats.convolver_yo.connect(Beats.gain_nodes[0]);
 
     //BPM 60000 / bpm = ms
-      // Start loading the drum kit.
+    // Start loading the drum kit.
     //bufferLoader class from Middle Ear Media tutorial on Web Audio Api
     bufferLoader = new BufferLoader(
         Audiocontext,
@@ -349,8 +313,6 @@ function init() {
         bufferLoadCompleted  
     );
 
-
-
   bufferLoader.load();
 
   function bufferLoadCompleted() {
@@ -362,12 +324,86 @@ function init() {
     Beats.wetGainNode.gain.value = (Beats.reverbSetting/100.0);
     Beats.innitted=true;
   }
+
+
+  document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }); //added this so cant scoll on mobile.
+
+
+//ORIENTATION CHANGES
+  var previousOrientation = window.orientation;
+  var checkOrientation = function(){
+    if(window.orientation !== previousOrientation){
+        previousOrientation = window.orientation;
+          var tabs = document.querySelector('#tabs');
+          var tabs2 = document.querySelector('#tabs2');
+          var topbar = document.querySelector('topbar-card');
+          var master = document.querySelector('#master');
+          var uber = document.querySelector('#ubercontainer');
+          var toolbar= document.querySelector('#toolbar');
+        // orientation changed, do your magic here
+        if (window.orientation==90 || window.orientation==-90) {
+          master.removeAttribute('vertical');
+          master.setAttribute('horizontal', 'horizontal');
+          uber.removeAttribute('horizontal');
+          uber.setAttribute('vertical', 'vertical');
+          //master.style.margin='0px';
+          tabs.removeAttribute('block');
+          tabs.setAttribute('hidden', 'hidden');
+          tabs2.removeAttribute('hidden');
+          tabs2.setAttribute('block', 'block');
+          toolbar.style.width = '75px';
+          toolbar.style.height='100%';
+          topbar.horizontal();
+        }
+        if (window.orientation==0) {
+          master.removeAttribute('horizontal');
+          master.setAttribute('vertical', 'vertical');
+          uber.removeAttribute('vertical');
+          uber.setAttribute('horizontal', 'horizontal');
+          //master.style.margin='auto';
+          tabs.removeAttribute('hidden');
+          tabs.setAttribute('block', 'block');
+          tabs2.removeAttribute('block');
+          tabs2.setAttribute('hidden', 'hidden');
+          toolbar.style.width = '100%';
+          toolbar.style.height = '50px';
+          topbar.vertical();
+        }
+
+    }
+  };
+  window.addEventListener("resize", checkOrientation, false);
+  window.addEventListener("orientationchange", checkOrientation, false);
+
+//TESTING TESTING 
+/*
+var tabs = document.querySelector('#tabs');
+          var tabs2 = document.querySelector('#tabs2');
+          var topbar = document.querySelector('topbar-card');
+          var master = document.querySelector('#master');
+          var uber = document.querySelector('#ubercontainer');
+          var toolbar= document.querySelector('#toolbar');
+
+          //master.style.margin='0px';
+          tabs.removeAttribute('block');
+          tabs.setAttribute('hidden', 'hidden');
+          tabs2.removeAttribute('hidden');
+          tabs2.setAttribute('block', 'block');
+          toolbar.style.width = '75px';
+          toolbar.style.height='100%';*/
 };//end of init
 
-document.body.addEventListener('touchmove', function(e){ e.preventDefault(); }); //added this so cant scoll on mobile.
+var masterplaytoggle=true;
 
+function play() {
+  var bc=document.querySelector('beat-card');
+    bc.go_dude();
+}
 
-
+function loadbeat() {
+  var bc=document.querySelector('beat-card');
+  bc.load_beat();
+}
 
 
 function playSound(buffer, time, samp, bc) {
@@ -383,16 +419,21 @@ function playSound(buffer, time, samp, bc) {
 
     //connect to the appropriate gain node
     source.connect(Beats.gain_nodes[samp]);
-
     source.start(time);
 }
 
+var maintabs = document.querySelector('#tabs');
+var maintabs2 = document.querySelector('#tabs2');
 
-var maintabs = document.querySelector('paper-tabs');
-var pages = document.querySelector('core-pages');
+var pages = document.querySelector('#pages');
 
 maintabs.addEventListener('core-select', function() {
   pages.selected = maintabs.selected;
+  maintabs2.selected = maintabs.selected;
+});
+maintabs2.addEventListener('core-select', function() {
+  pages.selected = maintabs2.selected;
+  maintabs.selected = maintabs2.selected;
 });
 
 
