@@ -3,23 +3,15 @@
 <link rel="import" href="../components/polymer/polymer.html">
 <link rel="import" href="../components/core-icon-button/core-icon-button.html">
 
-
-<link rel="import"
-href="../components/paper-shadow/paper-shadow.html">
 <link rel="import"
 href="../components/paper-slider/paper-slider.html">  
 <link rel="import" href="../components/core-drag-drop/core-drag-drop.html">
-<link rel="import" href="../components/core-icons/av-icons.html">
-<link rel="import" href="../components/core-icons/core-icons.html">
-<link rel="import" href="../components/core-iconset-svg/core-iconset-svg.html">
 
 <link rel="import" href="../components/paper-button/paper-button.html">
 <link rel="import"
 href="../components/paper-tabs/paper-tabs.html">
 <link rel="import"
 href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
-<link rel="import"
-    href="../components/paper-input/paper-input.html">
 
 
 <polymer-element name="beat-card">
@@ -206,7 +198,7 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
 
 
 
-  @media (min-width: 481px) {
+  @media (min-width: 668px) {
     .sliders{
       padding: 22px 10px 16px 10px;
     } 
@@ -283,24 +275,28 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
     width: 80%;
     margin: auto;
     background-color: #ccc;
+    z-index: 1;
   }
   #beat_row_3 {
     width: 80%;
     margin: auto;
     background-color: #ccc;
+    z-index: 1;
   }
   #beat_row_2 {
     background-color: #ccc;
+    z-index: 1;
   }
   #beat_row_4 {
     background-color: #ccc;
+    z-index: 1;
   }
   .s{
   	background-color: #bbc;
-  	outline: 1px solid #fff;
+  	outline: 1px solid #ccc;
   	opacity: 0.6;
   	cursor: default;
-  	filter: blur(5px);
+  	box-shadow: 2px 2px 10px #444;
   }
   .box {
     border-radius: 0px;
@@ -319,25 +315,10 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
   paper-dropdown-menu::shadow core-icon {
     height: 18px;
   }
-  .bpm_input {
-    margin:0px 8px;
-    width: 38px;
-  }
-  .bpm_input::shadow paper-input-decorator {
-    margin:0px;
-    padding:0px;
-  }
-  #topbar {
-    max-height: 42px;
-    white-space: nowrap;
-  }
+
   #sample_dropdwn {
   	max-width: 90px;
   }
-
-
-  
-
   
   /*.dropdwn {
     max-width: 80px;
@@ -351,12 +332,7 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
   
 </style>
 
-  <div id="topbar" horizontal layout around-justified>
-    <core-icon-button id='button' icon='label' on-tap="{{go_dude}}">{{play_toggle}}</core-icon-button>
-    <input type="button" value="ios" onclick="unmute_ios(bufferLoader.bufferList);" style="margin: 10px;"/>
-    <core-icon-button id='loadbutton' icon='launch' on-tap="{{load_beat}}">Load</core-icon-button>  
-    <span>BPM:<paper-input label="BPM" class="bpm_input" value='220' committedValue="{{bpm_yo}}"></paper-input></span>
-  </div> 
+
 
   <div vertical layout id="beat_container">
 
@@ -364,37 +340,37 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
 
 
     <ul flex one id="beat_row_1" layout horizontal>
-      <paper-shadow flex id="a" class="s" ></paper-shadow>
-      <paper-shadow flex id="b" class="s" ></paper-shadow>
-      <paper-shadow flex id="c" class="s" ></paper-shadow>
-      <paper-shadow flex id="d" class="s" ></paper-shadow>
-      <paper-shadow flex id="e" class="s" ></paper-shadow>
-      <paper-shadow flex id="f" class="s" ></paper-shadow>
-      <paper-shadow flex id="g" class="s" ></paper-shadow>
-      <paper-shadow flex id="h" class="s" ></paper-shadow>
+      <div flex id="a" class="s" ></div>
+      <div flex id="b" class="s" ></div>
+      <div flex id="c" class="s" ></div>
+      <div flex id="d" class="s" ></div>
+      <div flex id="e" class="s" ></div>
+      <div flex id="f" class="s" ></div>
+      <div flex id="g" class="s" ></div>
+      <div flex id="h" class="s" ></div>
     </ul>
     <div layout horizontal flex eight id="beat_inner_container">
       <ul flex one id="beat_row_4" layout vertical reverse>
-        <paper-shadow flex id="y" class="s" ></paper-shadow>
-        <paper-shadow flex id="z" class="s" ></paper-shadow>
-        <paper-shadow flex id="za" class="s" ></paper-shadow>
-        <paper-shadow flex id="zb" class="s" ></paper-shadow>
-        <paper-shadow flex id="zc" class="s" ></paper-shadow>
-        <paper-shadow flex id="zd" class="s" ></paper-shadow>
-        <paper-shadow flex id="ze" class="s" ></paper-shadow>
-        <paper-shadow flex id="zf" class="s" ></paper-shadow>
+        <div flex id="y" class="s" ></div>
+        <div flex id="z" class="s" ></div>
+        <div flex id="za" class="s" ></div>
+        <div flex id="zb" class="s" ></div>
+        <div flex id="zc" class="s" ></div>
+        <div flex id="zd" class="s" ></div>
+        <div flex id="ze" class="s" ></div>
+        <div flex id="zf" class="s" ></div>
       </ul>
       <div flex eight id="beat_central_container">
 
 
         <div id="middle_container">
           <paper-tabs id="tabs" selected="{{central_selected}}" self-end>
-          <paper-tab name="kit">Kit</paper-tab>
-          <paper-tab name="master">Master</paper-tab>
-          <paper-tab name="effects">Effects</paper-tab>
+          <paper-tab name="0">Kit</paper-tab>
+          <paper-tab name="1">Master</paper-tab>
+          <paper-tab name="2">Effects</paper-tab>
         </paper-tabs>
 
-        <div style="{{drumkit_visible}}">
+        <div style="{{kit_visible}}">
           <div vertical layout class="drumkit_container" unselectable='on' onselectstart='return false;' onmousedown='return false;'>
             <core-drag-drop></core-drag-drop>
             <div flex horizontal layout>
@@ -416,7 +392,7 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
         </div>
         
 
-        <div style="{{levels_visible}}">
+        <div style="{{master_visible}}">
           <div vertical layout class="drumkit_container">
           <div flex vertical layout around-justified class="sliders">
           <div flex>
@@ -476,7 +452,6 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
 
    <div style="{{effects_visible}}">
    	<!--effects: pitch/bitcrush, delay, volume/pan-->
-
       <div horizontal layout class="drumkit_container">
 
        <div class="fx" flex six vertical layout around-justified>
@@ -528,37 +503,40 @@ href="../components/paper-vertical-tabs/paper-vertical-tabs.html">
 
 </div> <!--end MIDDLE container-->
 
+
 </div>
 <ul flex one id="beat_row_2" layout vertical>
-  <paper-shadow flex id="i" class="s" draggable="false"></paper-shadow>
-  <paper-shadow flex id="j" class="s"></paper-shadow>
-  <paper-shadow flex id="k" class="s"></paper-shadow>
-  <paper-shadow flex id="l" class="s"></paper-shadow>
-  <paper-shadow flex id="m" class="s"></paper-shadow>
-  <paper-shadow flex id="n" class="s"></paper-shadow>
-  <paper-shadow flex id="o" class="s"></paper-shadow>
-  <paper-shadow flex id="p" class="s"></paper-shadow>
+  <div flex id="i" class="s" draggable="false"></div>
+  <div flex id="j" class="s"></div>
+  <div flex id="k" class="s"></div>
+  <div flex id="l" class="s"></div>
+  <div flex id="m" class="s"></div>
+  <div flex id="n" class="s"></div>
+  <div flex id="o" class="s"></div>
+  <div flex id="p" class="s"></div>
 </ul>
 </div>
 <ul flex one id="beat_row_3" layout horizontal reverse>
-  <paper-shadow flex id="q" class="s"></paper-shadow>
-  <paper-shadow flex id="r" class="s"></paper-shadow>
-  <paper-shadow flex id="s" class="s"></paper-shadow>
-  <paper-shadow flex id="t" class="s"></paper-shadow>
-  <paper-shadow flex id="u" class="s"></paper-shadow>
-  <paper-shadow flex id="v" class="s"></paper-shadow>
-  <paper-shadow flex id="w" class="s"></paper-shadow>
-  <paper-shadow flex id="x" class="s"></paper-shadow>
+  <div flex id="q" class="s"></div>
+  <div flex id="r" class="s"></div>
+  <div flex id="s" class="s"></div>
+  <div flex id="t" class="s"></div>
+  <div flex id="u" class="s"></div>
+  <div flex id="v" class="s"></div>
+  <div flex id="w" class="s"></div>
+  <div flex id="x" class="s"></div>
 </ul>
 </div>
 
 <!--<content></content>-->
 </template>
-<script type="text/javascript" src="prefixfree.min.js"></script>
+<!--<script type="text/javascript" src="js/prefixfree.min.js"></script>-->
 <!--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js" charset="utf-8"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.21/jquery-ui.min.js"></script>
 <script type="text/javascript" src="buffer-loader.js"></script>-->
 <script>
+
+
 
 
 function getPosition(element) {
@@ -577,7 +555,7 @@ function getPosition(element) {
 
 //THESE MATHS are the inverse of what is in the click function.
 function scaleToX(x) {
-  if (window.innerWidth<480) {
+  if (window.innerWidth<668) {
   	var xval=x/1.37;
   }
   else {
@@ -586,7 +564,7 @@ function scaleToX(x) {
   return xval;
 }
 function scaleToY(y) {
-  if (window.innerWidth<480) {
+  if (window.innerWidth<668) {
   	var yval=(y*-1)/.8772+114-24;
   }
   else {
@@ -606,6 +584,7 @@ function effectDropChange(index) {
 	var getter2 = document.querySelector('html /deep/ #fx_ui2');
     var bc = document.querySelector('beat-card');
     var samp = bc.sample_selected;
+    bc.set_translate(Beats.theThing, 0);
 	if (index=='pf') {
 	  getter.innerHTML = "Pitch: "; getter2.innerHTML = "Fade: ";
       bc.x_pos = Beats.FX.pitch[samp];
@@ -643,7 +622,7 @@ function effectDropChange(index) {
         Beats.theThing.style.top = scaleToY(Beats.FX.delay_time[samp])+'px';
 	}
 toggleThingYellow(samp, index);
-
+window.scroll(0,0) 
   
 };
 
@@ -675,7 +654,7 @@ function compressorDropChange(index) {
 	}
 	console.log('ratio: ',Beats.compressor_yo.ratio.value,':1');
 	console.log('knee: ',Beats.compressor_yo.knee.value,' dB');
-
+window.scroll(0,0) 
 };
 
 function filterDropChange(index) {
@@ -705,12 +684,13 @@ function filterDropChange(index) {
     Beats.filter_yo.Q.value = 24;
   }
   console.log('filter Q: ',Beats.filter_yo.Q.value,' dB');
+  window.scroll(0,0) 
 };
 
 //maybe do this POLYMER way instead...
 function reverbDropChange(index) {
-  //window.electedreverb = index;
   Beats.convolver_yo.buffer = bufferListy[(index+8)];
+  window.scroll(0,0) 
   //ANOTHER WAY TO ACCESS THE SHADOW DOM
   //var getter = document.querySelector('html /deep/ #reverbselect');//.children[index];
 };
@@ -753,19 +733,18 @@ function drop(dragInfo) {
 //this is where the real stuff goes down
 function play_yo_yo(bc) {
 
-
   if (Beats.setting==0) {
           //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
-          Beats.id_yo[Beats.setting].setZ(0);
+          Beats.id_yo[Beats.setting].style.boxShadow="1px 1px 2px #444";
           Beats.id_yo[Beats.setting].style.opacity="1.0";
-          Beats.id_yo[Beats.id_yo.length-1].setZ(1);
-          Beats.id_yo[Beats.id_yo.length-1].style.opacity="0.6"
+          Beats.id_yo[(Beats.id_yo.length-1)].style.boxShadow="2px 2px 10px #444";
+          Beats.id_yo[Beats.id_yo.length-1].style.opacity="0.6";
         }
         else {
-         //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor');
-         Beats.id_yo[Beats.setting].setZ(0);
+         //var id_style=window.getComputedStyle(Beats.id_yo[Beats.setting], null).getPropertyValue('backgroundColor'); outline: 1px solid #fff;
+         Beats.id_yo[Beats.setting].style.boxShadow="1px 1px 2px #444";
          Beats.id_yo[Beats.setting].style.opacity="1.0";
-         Beats.id_yo[(Beats.setting-1)].setZ(1);
+         Beats.id_yo[(Beats.setting-1)].style.boxShadow="2px 2px 10px #444";
          Beats.id_yo[(Beats.setting-1)].style.opacity="0.6"
        }
 
@@ -783,7 +762,7 @@ function play_yo_yo(bc) {
         Beats.setting=0;
         
       }
-    }
+}
 
 //de-mute audio on IOS...
 function unmute_ios(bufferList) {
@@ -823,7 +802,7 @@ function shuffleDelayNodes(samp) {
     //connect delay to master filter
     Beats.delay_nodes[samp].connect(Beats.filter_yo);
     Beats.delay_on[samp]=true;
-    console.log('delay on');
+    console.log('delay '+samp+' on');
     shuffleDelayFbNodes(samp);
   }
   else if (Beats.FX.delay_time[samp] > 0 && Beats.delay_on[samp]==true) {
@@ -847,7 +826,7 @@ function shuffleDelayNodes(samp) {
 	    	}
 	    }
 	    Beats.delay_on[samp]=false;
-	    console.log('delay off');
+	    console.log('delay '+samp+' off');
 	    shuffleDelayFbNodes(samp);
 	}
   }
@@ -891,7 +870,7 @@ function shuffleCrushNodes(samp) {
 		    }
 		    Beats.crush_nodes[samp].connect(Beats.filter_yo);
 		    Beats.crush_on[samp]=true;
-		    console.log('crush connected');
+		    console.log('crush '+samp+' connected');
 		}
 	}
 	else {
@@ -912,7 +891,7 @@ function shuffleCrushNodes(samp) {
 		    	else {Beats.gain_nodes[samp].connect(Beats.delay_nodes[samp]);}
 		    }
 		    Beats.crush_on[samp]=false;
-		    console.log('crush disconnected');
+		    console.log('crush '+samp+' disconnected');
 		}
 	}
 }
@@ -933,7 +912,7 @@ function shufflePanNodes(samp) {
 			}
 			else {Beats.pan_nodes[samp].connect(Beats.crush_nodes[samp])}
 			Beats.pan_on[samp]=true;
-			console.log('pan connected')
+			console.log('pan '+samp+' connected')
 		}
 	}
 	else {
@@ -948,7 +927,7 @@ function shufflePanNodes(samp) {
 			}
 			else {Beats.gain_nodes[samp].connect(Beats.crush_nodes[samp])}
 			Beats.pan_on[samp]=false;
-			console.log('pan disconnected');
+			console.log('pan '+samp+' disconnected');
 		}
 	}
 }
@@ -987,12 +966,14 @@ function loadFXSettings() {
 		var pan=Beats.FX.pan[i]/100.0;
         var z = 1 - Math.abs(pan);
         Beats.pan_nodes[i].setPosition(pan,0,z);
-        shuffleCrushNodes(i);
-        shuffleDelayNodes(i);
         Beats.delay_nodes[i].delayTime.value = Math.abs(Beats.FX.delay_time[i])/100.0;
         Beats.delay_fb_nodes[i].gain.value= (Beats.FX.delay_fb[i]/100.0)-0.1;
+        shuffleCrushNodes(i);
+        shuffleDelayNodes(i);
+        shufflePanNodes(i);
 	}
-
+	var bc = document.querySelector('beat-card');
+	bc.sample_selectedChanged();
 }
 
 function loadData() {
@@ -1010,10 +991,6 @@ function loadData() {
       Beats.is_animating_pitch = Beats.responsy.is_animating_pitch;
       Beats.is_animating_pan = Beats.responsy.is_animating_pan;
       Beats.is_animating_feedback = Beats.responsy.is_animating_feedback;
-      Beats.pan_on = Beats.responsy.pan_on;
-      Beats.crush_on = Beats.responsy.crush_on;
-      Beats.delay_on = Beats.responsy.delay_on;
-      Beats.delay_fb_on = Beats.responsy.delay_fb_on;
 
       loadFXSettings();
 
@@ -1047,36 +1024,27 @@ function xhr_yo() {
   		xhr_yo();
   	},
 
-    bpm_yo: 220,
-    bpm_yoChanged: function() {
-      console.log('bpm changed');
-      this.speed_setting = 60000/this.bpm_yo;
-    },
-    speed_setting: 273,
-
-    central_selected: 'kit',
+    central_selected: 0,
 
     central_selectedChanged: function() {
-      if (this.central_selected=='kit') {
-        this.drumkit_visible = 'display: block;';
-        this.effects_visible = 'display: none;';
-        this.levels_visible = 'display: none;';
-      }
-      else if (this.central_selected=='effects') {
-         this.drumkit_visible = 'display: none;';
-         this.effects_visible = 'display: block;';
-         this.levels_visible = 'display: none;';
+		if (this.central_selected=='0') {
+	        this.kit_visible = 'display: block;';
+	        this.master_visible = 'display: none;';
+	        this.effects_visible = 'display: none;';
+	    }
+	    else if (this.central_selected=='1') {
+         this.kit_visible = 'display: none;';
+         this.master_visible = 'display: block;';
+         this.effects_visible = 'display: none;';
          //var getter1 = this.$.samples_div.querySelector('#reverbselect');
          //getter1.selectedIndex = window.Beats.selectedreverb;
+	    }
+	    else if (this.central_selected=='2') {
+         this.kit_visible = 'display: none;';
+         this.master_visible = 'display: none;';
+         this.effects_visible = 'display: block;';
       }
-      else if (this.central_selected=='master') {
-         this.drumkit_visible = 'display: none;';
-         this.effects_visible = 'display: none;';
-         this.levels_visible = 'display: block;';
-      }
-      //console.log('select this', this)  HERE THIS = BEAT-CARD
     },
-      
 
     sample_pitch: 50,
     sample_pitch_proxy: 50,
@@ -1095,6 +1063,7 @@ function xhr_yo() {
 
         Beats.theThing.style.borderColor=color_array[this.sample_selected-1];
         Beats.theThing.style.transition='left 0s ease-in, top 0s ease-in';
+        this.set_translate(Beats.theThing, 0);
         if (Beats.effect_selected=='pf') {
         	Beats.theThing.style.left = scaleToX(Beats.FX.pitch[this.sample_selected])+'px';
         	Beats.theThing.style.top = scaleToY(Beats.FX.gain[this.sample_selected])+'px';
@@ -1175,7 +1144,13 @@ function xhr_yo() {
     var yPosition = e.clientY - parentPosition.y; //- (Beats.theThing.clientHeight / 2);
 
     //HERE IS THE MATH to set the div position and scale to 100
-    if (window.innerWidth<480) {
+    /*if (window.innerWidth<569) {
+    	offsetx = 74;
+    	offsety = 23;
+    	x_poss=(xPosition-73)*1.37;      // 100 / 73 = 1.37       73 is half the x length
+    	y_poss=(114-yPosition)*.8772;
+    }*/
+    if (window.innerWidth<668) {
     	offsetx = 74;
     	offsety = 23;
     	x_poss=(xPosition-73)*1.37;      // 100 / 73 = 1.37       73 is half the x length
@@ -1225,6 +1200,8 @@ function xhr_yo() {
       Beats.delay_nodes[samp].delayTime.value = Math.abs(Beats.FX.delay_time[samp])/100.0;
       Beats.delay_fb_nodes[samp].gain.value= (Beats.FX.delay_fb[samp]/100.0)-0.1;
   	}
+
+  	bc.set_translate(Beats.theThing, 0);
   },
 
   //these two are out of 100
@@ -1303,7 +1280,7 @@ function xhr_yo() {
     var bc = document.querySelector('beat-card');
     var samp = bc.sample_selected;
 
-    Beats.theThing.style.transition='left .2s ease-in, top .2s ease-in';
+    Beats.theThing.style.transition='transform .2s ease-in-out';
 
     if (Beats.effect_selected=='pf') {
       if (Beats.is_animating_pitch[samp]==false) {
@@ -1313,7 +1290,7 @@ function xhr_yo() {
       else {
         Beats.theThing.style.backgroundColor='whitesmoke';
         Beats.is_animating_pitch[samp]=false;
-        Beats.theThing.style.left = scaleToX(Beats.FX.pitch[bc.sample_selected])+'px';
+        bc.set_translate(Beats.theThing, 0);
         bc.x_pos=Beats.FX.pitch[bc.sample_selected];
       }
     }
@@ -1328,7 +1305,7 @@ function xhr_yo() {
           var pan=Beats.FX.pan[samp]/100.0;
 	      var z = 1 - Math.abs(pan);
 	      Beats.pan_nodes[samp].setPosition(pan,0,z);
-        Beats.theThing.style.left = scaleToX(Beats.FX.pan[bc.sample_selected])+'px';
+       bc.set_translate(Beats.theThing, 0);
         bc.x_pos=Beats.FX.pan[bc.sample_selected];
       }
     }
@@ -1340,7 +1317,7 @@ function xhr_yo() {
       else {
         Beats.theThing.style.backgroundColor='whitesmoke';
         Beats.is_animating_feedback[samp]=false;
-        Beats.theThing.style.left = scaleToX(Beats.FX.delay_fb[bc.sample_selected])+'px';
+        bc.set_translate(Beats.theThing, 0);
         bc.x_pos=Beats.FX.delay_fb[bc.sample_selected];
       }
     }
@@ -1377,9 +1354,9 @@ function xhr_yo() {
 		  }
 
       //HIDE WITH THIS PUBLISHED PROPERTY, CAN BE ACESSED FROM OUTSIDE!!!!
-      this.drumkit_visible = 'display: block;';
+      this.kit_visible = 'display: block;';
+      this.master_visible = 'display: none;';
       this.effects_visible = 'display: none;';
-      this.levels_visible = 'display: none;';
 
       this.x_pos = 0;
       this.y_pos=0;
@@ -1447,15 +1424,14 @@ function xhr_yo() {
 
       if (Beats.not_playing==false) {
         Beats.not_playing=true;
-        this.play_toggle = "Play";
-        var buttonicon = this.$.topbar.querySelector('#button');
-        buttonicon.icon = "label";
+
       } //end if Beats.not_playing
       else {
          Beats.not_playing=false;
          function goingyoyo() {
             if (Beats.not_playing==false) {
 	    		play_yo_yo(this); //here's the call
+	    		//make a triagle wave
 	    		anim1=(Math.abs(Beats.setting-16)-8)*12.5/100.0;
 	    		//HERE IS THE LOOP TO AUTOMATE ALL EFFECTS! 
                 for (i=1; i<9; i++) {
@@ -1464,61 +1440,77 @@ function xhr_yo() {
                 		//actual pitch is automatically updated in playSound, from pitch_anim
                 	}
                 	if (Beats.is_animating_pan[i]==true) {
-                		if (Beats.beats_array[Beats.setting]==i) {
+                		//if (Beats.beats_array[Beats.setting]==i) {
                 		  var pan=Beats.FX.pan[i]*anim1/100.0;
 					      var z = 1 - Math.abs(pan);
 					      Beats.pan_nodes[i].setPosition(pan,0,z);
-                		}
+                		//}
                 	}
                 	if (Beats.is_animating_feedback[i]==true) {
-                		if (Beats.beats_array[Beats.setting]==i) {
+                		//if (Beats.beats_array[Beats.setting]==i) {
                 			Beats.delay_fb_nodes[i].gain.value= (Beats.FX.delay_fb[i]*anim1/100.0)-0.1;
-                		}
+                		//}
                 	}
                 }
               //AND HERE is THE UI ANIMATION...
-             if (this.central_selected=='effects') {
+             if (this.central_selected==2) {
              	//console.log('animating');
-              if (Beats.is_animating_pitch[this.sample_selected]==true && Beats.effect_selected=='pf') {
-              	this.x_pos=Math.round(this.pitch_anim[this.sample_selected]);
-              	var effect=Beats.FX.pitch[this.sample_selected];
-              	this.thing_anim(effect);
+              if (Beats.effect_selected=='pf') {
+              	if (Beats.is_animating_pitch[this.sample_selected]==true) {
+	              	this.x_pos=Math.round(this.pitch_anim[this.sample_selected]);
+	              	var effect=Beats.FX.pitch[this.sample_selected];
+	              	this.thing_anim(effect);
+	              }
               }
-              if (Beats.is_animating_pan[this.sample_selected]==true && Beats.effect_selected=='pc') {
-              	this.pan_anim[this.sample_selected]=anim1*Beats.FX.pan[this.sample_selected];
-              	this.x_pos=Math.round(this.pan_anim[this.sample_selected]);
-              	var effect=Beats.FX.pan[this.sample_selected];
-              	this.thing_anim(effect);
+              else if (Beats.effect_selected=='pc') {
+              	if (Beats.is_animating_pan[this.sample_selected]==true) {
+	              	this.pan_anim[this.sample_selected]=anim1*Beats.FX.pan[this.sample_selected];
+	              	this.x_pos=Math.round(this.pan_anim[this.sample_selected]);
+	              	var effect=Beats.FX.pan[this.sample_selected];
+	              	this.thing_anim(effect);
+	              }
               }
-              if (Beats.is_animating_feedback[this.sample_selected]==true && Beats.effect_selected=='d') {
-              	this.feedback_anim[this.sample_selected]=anim1*Beats.FX.delay_fb[this.sample_selected];
-              	this.x_pos=Math.round(this.feedback_anim[this.sample_selected]);
-              	var effect=Beats.FX.delay_fb[this.sample_selected];
-              	this.thing_anim(effect);
+              else if (Beats.effect_selected=='d') {
+              	if (Beats.is_animating_feedback[this.sample_selected]==true) {
+	              	this.feedback_anim[this.sample_selected]=anim1*Beats.FX.delay_fb[this.sample_selected];
+	              	this.x_pos=Math.round(this.feedback_anim[this.sample_selected]);
+	              	var effect=Beats.FX.delay_fb[this.sample_selected];
+	              	this.thing_anim(effect);
+	              }
               }
              }//end if central selected == effects
 
-    	    		this.async(goingyoyo, null, this.speed_setting/2);
+    	    		this.async(goingyoyo, null, Beats.speed_setting/2);
         	}//end if is playing
           }	//end recursive function
           this.async(goingyoyo, null, 1);
-        this.play_toggle = "Stop";
-        var buttonicon = this.$.topbar.querySelector('#button');
-        buttonicon.icon = "label-outline";
       }
 
     }, //end go_dude
 
     thing_anim: function(effect) {
-    	var bpms = 480/this.bpm_yo;
-        if (Beats.setting==0) {
-            	Beats.theThing.style.transition='left '+bpms+'s ease-in-out';
-            	Beats.theThing.style.left = scaleToX(effect* -1.0)+'px';
+    	var bpm_yo=60000/Beats.speed_setting;
+    	var bpms = 480/bpm_yo;
+    	console.log
+        if (Beats.setting==1) {
+            	Beats.theThing.style.transition='transform '+bpms+'s ease-in-out';
+            	Beats.theThing.style.webkitTransition='-webkit-transform '+bpms+'s ease-in-out';
+            	var pix=scaleToX(effect)*-2.0;
+            	this.set_translate(Beats.theThing, pix);
         }
-        if (Beats.setting==15) {
-            	Beats.theThing.style.transition='left '+bpms+'s ease-in-out';
-            	Beats.theThing.style.left = scaleToX(effect)+'px';
+        if (Beats.setting==16) {
+            	Beats.theThing.style.transition='transform '+bpms+'s ease-in-out';
+            	Beats.theThing.style.webkitTransition='-webkit-transform '+bpms+'s ease-in-out';
+            	this.set_translate(Beats.theThing, 0);
         }
+    },
+
+    set_translate: function(e, pix) {
+	  e.style["-webkit-transform"] = "translate("+ pix +"px,0px)";
+	  e.style["-moz-transform"] = "translate(" + pix +"px,-0px)";
+	  e.style["-ms-transform"] = "translate(" + pix + "px,-0px)";
+	  e.style["-o-transform"] = "translate(" + pix  + "px,0px)";
+	  e.style["transform"] = "translate(" + pix + "px,-0px)";
     }
 
 });//end Polymer

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+
+<link rel="import" href="../components/polymer/polymer.html">
+<link rel="import" href="../components/core-icon-button/core-icon-button.html">
+<link rel="import"
+    href="../components/paper-shadow/paper-shadow.html">
+<link rel="import"
+    href="../components/paper-slider/paper-slider.html">  
+
+<link rel="import" href="../components/paper-button/paper-button.html">
+<link rel="import"
+    href="../components/paper-tabs/paper-tabs.html">
+
+
+
+<polymer-element name="topbar-card">
+<template>
+  <style>
+    
+  :host {
+      display: block;
+      position: relative;
+      font-size: 1.2rem;
+      font-weight: 300;
+    }
+
+  .bpm_input {
+    margin:0px 8px;
+    width: 32px;
+    padding: 0px 0px 8px 0px;
+  }
+  .bpm_input::shadow paper-input-decorator {
+    margin:0px;
+    padding:0px;
+  }
+  .bpm_input::shadow paper-input-decorator#decorator {
+    margin:0px;
+    padding:0px;
+  }
+
+  #topbar {
+    white-space: nowrap;
+    margin: auto;
+      }
+  @media (min-width: 640px) {
+
+  }
+
+
+  </style>
+
+<div id="topbar" horizontal layout center around-justified>
+    <core-icon-button id='button' on-tap="{{play}}" icon='label'>{{play_label}}</core-icon-button>
+    <input type="button" value="ios" onclick="unmute_ios(bufferLoader.bufferList);" style="margin: 10px;"/>
+    <core-icon-button id='loadbutton' icon='launch' on-tap="{{load}}">{{load_label}}</core-icon-button>  
+    <span>{{bpm_label}}<paper-input label="BPM" class="bpm_input" value='220' committedValue="{{bpm_yo}}"></paper-input></span>
+</div>
+
+</template>
+
+
+<script>
+
+Polymer('topbar-card', {
+
+  ready: function() {
+    //TESTING TESTING
+    //this.horizontal();
+  },
+
+  bpm_yo: 220,
+  bpm_yoChanged: function() {
+    console.log('bpm changed');
+    Beats.speed_setting = 60000/this.bpm_yo;
+  },
+  play: function() {
+    if (masterplaytoggle==false) {
+      this.$.button.icon='label';
+      this.play_label='Play'
+      masterplaytoggle=true;
+    }
+    else if (masterplaytoggle==true) {
+      this.$.button.icon='label-outline';
+      this.play_label='Stop'
+      masterplaytoggle=false;
+    }
+    play();
+  },
+  load: function() {
+    loadbeat();
+  },
+  horizontal: function() {
+    this.$.topbar.removeAttribute('horizontal');
+    this.$.topbar.setAttribute('vertical','vertical');
+    this.$.topbar.style.width="80px";
+    this.$.topbar.style.height="320px";
+    this.$.topbar.style.left='75px';
+    this.play_label='';
+    this.load_label='';
+    this.bpm_label='';
+  },
+  vertical: function() {
+    this.$.topbar.removeAttribute('vertical');
+    this.$.topbar.setAttribute('horizontal','horizontal');
+    this.$.topbar.style.width="100%";
+    this.$.topbar.style.height="50px";
+    this.$.topbar.style.left='0px';
+    this.play_label='Play';
+    this.load_label='Load';
+    this.bpm_label='BPM: ';
+  },
+  play_label: 'Play',
+  load_label: 'Load',
+  bpm_label: 'BPM: ',
+
+});
+
+
+</script>
+</polymer-element>
